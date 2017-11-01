@@ -1,5 +1,5 @@
 package com.pe.proydsw.entidades;
-// Generated 01-nov-2017 11:12:33 by Hibernate Tools 4.3.1
+// Generated 01-nov-2017 12:41:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,6 +14,7 @@ public class Maquinaria  implements java.io.Serializable {
      private int intIdMaquinaria;
      private Categoria categoria;
      private String varNombreMaquinaria;
+     private char chrEstado;
      private Set tiempomaquinarias = new HashSet(0);
      private Set registros = new HashSet(0);
      private Set paradas = new HashSet(0);
@@ -22,15 +23,17 @@ public class Maquinaria  implements java.io.Serializable {
     }
 
 	
-    public Maquinaria(int intIdMaquinaria, Categoria categoria, String varNombreMaquinaria) {
+    public Maquinaria(int intIdMaquinaria, Categoria categoria, String varNombreMaquinaria, char chrEstado) {
         this.intIdMaquinaria = intIdMaquinaria;
         this.categoria = categoria;
         this.varNombreMaquinaria = varNombreMaquinaria;
+        this.chrEstado = chrEstado;
     }
-    public Maquinaria(int intIdMaquinaria, Categoria categoria, String varNombreMaquinaria, Set tiempomaquinarias, Set registros, Set paradas) {
+    public Maquinaria(int intIdMaquinaria, Categoria categoria, String varNombreMaquinaria, char chrEstado, Set tiempomaquinarias, Set registros, Set paradas) {
        this.intIdMaquinaria = intIdMaquinaria;
        this.categoria = categoria;
        this.varNombreMaquinaria = varNombreMaquinaria;
+       this.chrEstado = chrEstado;
        this.tiempomaquinarias = tiempomaquinarias;
        this.registros = registros;
        this.paradas = paradas;
@@ -56,6 +59,13 @@ public class Maquinaria  implements java.io.Serializable {
     
     public void setVarNombreMaquinaria(String varNombreMaquinaria) {
         this.varNombreMaquinaria = varNombreMaquinaria;
+    }
+    public char getChrEstado() {
+        return this.chrEstado;
+    }
+    
+    public void setChrEstado(char chrEstado) {
+        this.chrEstado = chrEstado;
     }
     public Set getTiempomaquinarias() {
         return this.tiempomaquinarias;

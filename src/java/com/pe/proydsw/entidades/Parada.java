@@ -1,5 +1,5 @@
 package com.pe.proydsw.entidades;
-// Generated 01-nov-2017 11:12:33 by Hibernate Tools 4.3.1
+// Generated 01-nov-2017 12:41:01 by Hibernate Tools 4.3.1
 
 
 
