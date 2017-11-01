@@ -45,5 +45,11 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mydbnehil</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping resource="com/pe/proydsw/entidades/Maquinaria.hbm.xml"/>
+    <mapping resource="com/pe/proydsw/entidades/Turno.hbm.xml"/>
+    <mapping resource="com/pe/proydsw/entidades/Categoria.hbm.xml"/>
+    <mapping resource="com/pe/proydsw/entidades/Registro.hbm.xml"/>
+    <mapping resource="com/pe/proydsw/entidades/Parada.hbm.xml"/>
+    <mapping resource="com/pe/proydsw/entidades/Tiempomaquinaria.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-nov-2017 11:12:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pe.proydsw.entidades.Turno" table="turno" catalog="mydbnehil" optimistic-lock="version">
+        <id name="intIdTurno" type="int">
+            <column name="intIdTurno" />
+            <generator class="assigned" />
+        </id>
+        <property name="varNombreTurno" type="string">
+            <column name="varNombreTurno" length="45" not-null="true" />
+        </property>
+        <property name="varInicioTurno" type="string">
+            <column name="varInicioTurno" length="45" not-null="true" />
+        </property>
+        <property name="varFinTurno" type="string">
+            <column name="varFinTurno" length="45" not-null="true" />
+        </property>
+        <set name="tiempomaquinarias" table="tiempomaquinaria" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="intIdTurno" not-null="true" />
+            </key>
+            <one-to-many class="com.pe.proydsw.entidades.Tiempomaquinaria" />
+        </set>
+        <set name="registros" table="registro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="intIdTurno" not-null="true" />
+            </key>
+            <one-to-many class="com.pe.proydsw.entidades.Registro" />
+        </set>
+        <set name="paradas" table="parada" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="intIdTurno" not-null="true" />
+            </key>
+            <one-to-many class="com.pe.proydsw.entidades.Parada" />
+        </set>
+    </class>
+</hibernate-mapping>

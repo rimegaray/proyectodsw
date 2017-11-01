@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-nov-2017 11:12:38 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pe.proydsw.entidades.Tiempomaquinaria" table="tiempomaquinaria" catalog="mydbnehil" optimistic-lock="version">
+        <id name="intIdTiempoMaquinaria" type="int">
+            <column name="intIdTiempoMaquinaria" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="maquinaria" class="com.pe.proydsw.entidades.Maquinaria" fetch="select">
+            <column name="intIdMaquinaria" not-null="true" />
+        </many-to-one>
+        <many-to-one name="turno" class="com.pe.proydsw.entidades.Turno" fetch="select">
+            <column name="intIdTurno" not-null="true" />
+        </many-to-one>
+        <property name="varFecha" type="string">
+            <column name="varFecha" length="10" not-null="true" />
+        </property>
+        <property name="varTiempoUso" type="string">
+            <column name="varTiempoUso" length="10" not-null="true" />
+        </property>
+        <property name="varTiempoNouso" type="string">
+            <column name="varTiempoNouso" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
