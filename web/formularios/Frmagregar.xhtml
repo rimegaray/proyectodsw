@@ -15,42 +15,50 @@
         <ui:composition template="./../template/layout.xhtml">
             <ui:define name="content">
                 <div align="center" >
-                    
-                    <h:form id="frmListaMaquinarias">
+                    <h:form id="formAgregarMaquinaria">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
-                        <p:panel style="width: 100%; margin-top: 5%" id="paneltable">
-                            <p:dataTable rowKey="#{item.intIdMaquinaria}" id="tablaListaTEmpresa" var="item" value="#{maquinariaMBR.listadoMaquinarias()}" scrollable="true" scrollHeight="300"  
-                                         style="width: 100%"   
-                                         emptyMessage="No se encontro información">
-                                
-                                <p:column headerText="Nombre" style="text-align: center;font-family: arial;font-size: 12px;width: 15%"  sortBy="#{item.varNombreMaquinaria}"> >
-                                    <h:outputText value="#{item.varNombreMaquinaria}"/>
-                                    
-                                </p:column>
-                                
-                                <p:column headerText="Categoria" style="text-align: center;font-family: arial;font-size: 12px;width: 20%"  >
-                                    <h:outputText value=" #{maquinariaMBR.cargarcategoria(item.intIdMaquinaria)}"/>
-                                </p:column>
-                                
-                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 12px;width: 15%"  >
-                                    <h:outputText value="#{item.chrEstado=='A' ? 'ENCENDIDO':'APAGADO'}"/>
-                                </p:column>
-                                
-                                <p:column headerText="Detalle" style="text-align: center;font-family: arial;font-size: 9px;width: 15%"  >
-                                    
-                                    <p:commandButton  action="#{mantProfesorMBR.registrarProfe()}" update="frmListaMaquinarias" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
-                                </p:column>
-                                
-                                
-                            </p:dataTable>
-                            
-                            <p:poll interval="3"  update="paneltable" />
+                        <p:panel style="margin-top:2%;width: 60%;">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="6">
+                                        <h:outputText value="REGISTRO MAQUINARIA" style="font-size: 15px;text-decoration: underline"/>
+                                    </p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:panelGrid  id="panelinfoemp" styleClass="companyHeaderGrid" style="margin-top:5px; margin-left: 15px">
+
+                                <p:row>
+                                    <p:column style="text-align: right">                                                                                                                 
+                                        <p:outputLabel value="Nombre Maquinaria :" for="codNomMaq" style="font-family: arial;font-size: 11px"/>                                        
+                                    </p:column>
+
+                                    <p:column>                                        
+                                        <p:inputText size="5" maxlength="5" id="codNomMaq" value="#{maquinariaMBR.nombremaq}" style="font-family: arial;font-size: 11px"/>                                    
+                                    </p:column>
+
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Categoria :" for="CatMaq" style="font-family: arial;font-size: 11px"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <p:selectOneMenu id="CatMaq" value="#{maquinariaMBR.catmaq}" style="font-family: arial;width: 180px">                                        
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione Categoria de Maquinaria"/>                                             
+                                            <f:selectItem itemValue="Montacargas" itemLabel="Montacargas"/>
+                                            <f:selectItem itemValue="Prensas" itemLabel="Prensas"/>
+                                            <f:validator validatorId="validatorCombox"/>    
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
 
                         </p:panel>
-                        
-                        
+                        <h:panelGrid id="panelbtn" columns="2" cellpadding="0" cellspacing="1" border="0" width="28%" style="align-items: center">
+                            <p:commandButton immediate="true" value="Nuevo Registro" action="#{maquinariaMBR.registrarCate()}" update=":formAgregarMaquinaria" icon="ui-icon-document"  style="font-family: arial;font-size: 11px;"/>                 
+                        </h:panelGrid>
+
                     </h:form>
-                    
                 </div>
             </ui:define>
             <ui:define name="left">

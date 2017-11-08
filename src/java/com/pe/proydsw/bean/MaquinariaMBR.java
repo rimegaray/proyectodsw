@@ -5,14 +5,9 @@
  */
 package com.pe.proydsw.bean;
 
-
-
-import com.pe.proydsw.dao.CategoriaDao;
-import com.pe.proydsw.dao.MaquinariaDao;
-import com.pe.proydsw.entidades.Categoria;
-import com.pe.proydsw.entidades.Maquinaria;
-import com.pe.proydsw.utils.HibernateUtil;
 import com.pe.proydsw.utils.MensajeSYSUtils;
+import com.sium.dao.component.MaquinariaDAO;
+import com.sium.dao.to.MaquinariaTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,21 +28,17 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     Session session;
     Transaction transaction;
     
-    private MaquinariaDao maquinariadao;
-    private Maquinaria mmaquinaria;
+    private MaquinariaDAO maquinariadao;
+    private MaquinariaTO mmaquinaria;
+    
+    String nombremaq;
+    String catmaq;
     
     
-    private List<Maquinaria> listamaquinaria;
+    private List<MaquinariaTO> listamaquinaria;
 
-   
-    
     private Boolean insert = Boolean.TRUE;
     private Boolean chkestado;
-
-    
-   
-
-    
     
     @PostConstruct
     private void init(){
@@ -56,29 +47,23 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     }
     
     private void initInstancia(){        
-        this.mmaquinaria = new Maquinaria();
-        this.maquinariadao = new MaquinariaDao(); 
+        this.mmaquinaria = new MaquinariaTO();
+        this.maquinariadao = new MaquinariaDAO(); 
         this.listamaquinaria = new ArrayList();
-        
         chkestado = true;
-        
     }
     
     private void initlistDep() {
-        
     }
 
     public String registrarCate(){
-            
-        this.session=null;
-        this.transaction=null;
-        
+        System.out.println("sdsd: "+nombremaq);
+        System.out.println("sdsd: "+catmaq);
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
+            this.mmaquinaria = new MaquinariaTO();
+            String respuesta;
         
-            int countReg=maquinariadao.ContadorDeRegMaquinaria(this.session);
+            int countReg=maquinariadao.ContadorDeRegMaquinaria();
             int idCate=0;
             if(countReg!=0){
                 idCate=countReg+1;
@@ -86,52 +71,39 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
                 idCate=1;
             }
             
-            this.mmaquinaria.setIntIdMaquinaria(idCate);
             
-       
-            respuesta = maquinariadao.GrabarMaquinaria(this.mmaquinaria);
-            this.transaction.commit();
+            this.mmaquinaria.setCodigoMaquinaria(idCate);
+            this.mmaquinaria.setNombre(nombremaq);
+            this.mmaquinaria.setCategoria(catmaq);
+//            System.out.println(nombremaq);
+            
+            
+            respuesta = maquinariadao.insertMaquinaria(mmaquinaria);
         
-        if (respuesta){
+        if (respuesta.equals("correcto")){
             messageInfo("Se realizo la creación del Nivel");
         }else{
             messageError("NO Se realizo la creación del Nivel");
         }
         }
         catch (Exception ex) {
-            
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
+           
             messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
             
             return null;
         }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
-        return "/FORMULARIOS/FrmManttoNivel";
-        
+           
+        return "/formularios/Frmagregar";
     }
     
     public String limpiarcajas(){
         return "/FORMULARIOS/FrmManttoNivel";
     }
     
-    public List<Maquinaria> listadoMaquinarias()
-    {
-        System.out.println("INGRESO A LA FUNCION");
-        this.session=null;
-        this.transaction=null;
+    public List<MaquinariaTO> listadoMaquinarias(){
         
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            this.listamaquinaria= maquinariadao.ListadoMaquinariaTodos(session);
+            this.listamaquinaria= maquinariadao.listaMaquinaria();
 
             this.transaction.commit();
             
@@ -140,97 +112,45 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         }
         catch (Exception ex) {
             System.out.println("ERROR :"+ex.getMessage());
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
+            
             messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
             
             return null;
         }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
             
     }
     
-    public String update()
-    {
-        this.session=null;
-        this.transaction=null;
-        
-        try {
-            
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            if (chkestado==true) {                
-                this.mmaquinaria.setChrEstado('A');
-            }else{                
-                this.mmaquinaria.setChrEstado('I');
-            }
-            
-            maquinariadao.ActualizarMaquinaria(this.session,this.mmaquinaria);
 
-            this.transaction.commit();
-            
-            messageInfo("Correcto: Los cambios fueron guardados correctamente");
-            
-            insert = Boolean.TRUE;
-
-        }
-        catch (Exception ex) {
-            System.out.println("ERROR :"+ex.getMessage());
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
-            
-        }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
-            return "/FORMULARIOS/FrmManttoNivel";
-    }
-    
-    public String cargarcategoria(int id)
-    {
-        this.session=null;
-        this.transaction=null;
-        String micategoria = null;
-        
-        try {
-            
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            Maquinaria mimaquina = maquinariadao.ListadoMaquinariaxId(session, id);
-           micategoria = mimaquina.getCategoria().getVarNombreCategoria();
-            
-            
-
-        }
-        catch (Exception ex) {
-            System.out.println("ERROR :"+ex.getMessage());
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
-            
-        }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
-            return micategoria;
-    }
+//    public String cargarcategoria(int id){
+//        this.session=null;
+//        this.transaction=null;
+//        String micategoria = null;
+//        
+//        try {
+//            
+//            this.session = HibernateUtil.getSessionFactory().openSession();
+//            this.transaction = this.session.beginTransaction();
+//            
+//            Maquinaria mimaquina = maquinariadao.ListadoMaquinariaxId(session, id);
+//           micategoria = mimaquina.getCategoria().getVarNombreCategoria();            
+//
+//        }
+//        catch (Exception ex) {
+//            System.out.println("ERROR :"+ex.getMessage());
+//            if (this.transaction!=null){
+//                this.transaction.rollback();
+//            }
+//            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
+//            
+//        }
+//            finally
+//            {
+//                if (this.session!=null){
+//                    this.session.close();
+//                }
+//            }
+//            return micategoria;
+//    }
     
 //    public void cargarCombos(){
 //        this.session=null;
@@ -266,54 +186,82 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
 //                    }
 //                }
 //        }
-    
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public MaquinariaDAO getMaquinariadao() {
+        return maquinariadao;
+    }
+
+    public void setMaquinariadao(MaquinariaDAO maquinariadao) {
+        this.maquinariadao = maquinariadao;
+    }
+
+    public MaquinariaTO getMmaquinaria() {
+        return mmaquinaria;
+    }
+
+    public void setMmaquinaria(MaquinariaTO mmaquinaria) {
+        this.mmaquinaria = mmaquinaria;
+    }
+
+    public List<MaquinariaTO> getListamaquinaria() {
+        return listamaquinaria;
+    }
+
+    public void setListamaquinaria(List<MaquinariaTO> listamaquinaria) {
+        this.listamaquinaria = listamaquinaria;
+    }
+
     public Boolean getInsert() {
         return insert;
     }
-    
+
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
 
-    
-    public boolean isChkestado() {
+    public Boolean getChkestado() {
         return chkestado;
     }
 
-    public void setChkestado(boolean chkestado) {
+    public void setChkestado(Boolean chkestado) {
         this.chkestado = chkestado;
     }
 
-    public List<Maquinaria> getListamaquinaria() {
-        return listamaquinaria;
+    public String getNombremaq() {
+        return nombremaq;
     }
 
-    public void setListamaquinaria(List<Maquinaria> listamaquinaria) {
-        this.listamaquinaria = listamaquinaria;
+    public void setNombremaq(String nombremaq) {
+        this.nombremaq = nombremaq;
     }
 
-    public Maquinaria getMmaquinaria() {
-        return mmaquinaria;
+    public String getCatmaq() {
+        return catmaq;
     }
 
-    public void setMmaquinaria(Maquinaria mmaquinaria) {
-        this.mmaquinaria = mmaquinaria;
-    }
-    
-    
-
-    
-
-    
-    
-    
-    
-    
+    public void setCatmaq(String catmaq) {
+        this.catmaq = catmaq;
     }
 
-
-
     
-
     
-
+    
+    
+    
+}
