@@ -5,7 +5,6 @@
  */
 package com.pe.proydsw.bean;
 
-
 import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.to.MaquinariaTO;
 import java.io.Serializable;
@@ -16,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import com.pe.proydsw.utils.MensajeSYSUtils;
 
 /**
  *
@@ -30,248 +30,171 @@ public class MaquinasMBR  implements Serializable{
     
     private MaquinariaDAO maquinariadao;
     private MaquinariaTO mmaquinaria;
-
-//   
-//    private FamiliaDAO familiadao;
-//    private Mfamilia mfamilia;
-//    private List<Mfamilia> listafamilia;
-//    
-//    private List<Mfamilia> listaFamiliaFiltrado;
-    boolean chkestado;
-//    private boolean insert = true;
-//    private Boolean insert = Boolean.TRUE;
-
-//    public Mfamilia getMfamilia() {
-//        return mfamilia;
-//    }
-//
-//    public void setMfamilia(Mfamilia mfamilia) {
-//        this.mfamilia = mfamilia;
-//    }
-
     
-
+    String nombremaq;
+    String catmaq;
     
     
+    private List<MaquinariaTO> listamaquinaria;
+
+    private Boolean insert = Boolean.TRUE;
+    private Boolean chkestado;
     
     @PostConstruct
     private void init(){
         initInstancia();
-        initlistDep();
+//        initlistDep();
     }
     
     private void initInstancia(){        
-        this.mfamilia = new Mfamilia();
-        this.familiadao = new FamiliaDAO(); 
-        this.listafamilia = new ArrayList();
-        
+        this.mmaquinaria = new MaquinariaTO();
+        this.maquinariadao = new MaquinariaDAO(); 
+        this.listamaquinaria = new ArrayList();
         chkestado = true;
-        
     }
     
     private void initlistDep() {
-        
     }
 
-    public String registrarFami(){
-            
-        this.session=null;
-        this.transaction=null;
-        
+    public String registrarCate(){
+        System.out.println("sdsd: "+nombremaq);
+        System.out.println("sdsd: "+catmaq);
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
+            this.mmaquinaria = new MaquinariaTO();
+            String respuesta;
         
-            int countReg=familiadao.ContadorDeRegFamilia(this.session);
-            int idFamilia=0;
+            int countReg=maquinariadao.ContadorDeRegMaquinaria();
+            int idCate=0;
             if(countReg!=0){
-                idFamilia=countReg+1;
+                idCate=countReg+1;
             }else{
-                idFamilia=1;
+                idCate=1;
             }
             
-            this.mfamilia.setIntidfamilia(idFamilia);
-            if (chkestado==true) {                
-                this.mfamilia.setChrestado('A');
-            }else{                
-                this.mfamilia.setChrestado('I');
-            }
-       
-            respuesta = familiadao.GrabarFamilia(this.mfamilia);
-            this.transaction.commit();
+            
+            this.mmaquinaria.setCodigoMaquinaria(idCate);
+            this.mmaquinaria.setNombre(nombremaq);
+            this.mmaquinaria.setCategoria(catmaq);
+//            System.out.println(nombremaq);
+            
+            
+            respuesta = maquinariadao.insertMaquinaria(mmaquinaria);
         
-        if (respuesta){
-            messageInfo("Se realizo la creación de la Familia");
+        if (respuesta.equals("correcto")){
+            System.out.println("Se realiazo la creacion");
+//            messageInfo("Se realizo la creación del Nivel");
         }else{
-            messageError("NO Se realizo la creación de la Familia");
+//            messageError("NO Se realizo la creación del Nivel");
         }
         }
         catch (Exception ex) {
-            
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
+           
+//            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
             
             return null;
         }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
-        return "/MANTENIMIENTOS/FrmManttoFamilia";
-        
+           
+        return "/formularios/Frmagregar";
     }
     
     public String limpiarcajas(){
-        return "/MANTENIMIENTOS/FrmManttoFamilia";
+        return "/FORMULARIOS/FrmManttoNivel";
     }
     
-    public List<Mfamilia> listadoCargo()
-    {
-        //System.out.println("INGRESO A LA FUNCION");
-        this.session=null;
-        this.transaction=null;
+    public List<MaquinariaTO> listadoMaquinarias(){
         
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            this.listafamilia= familiadao.ListadoFamiliaTodos(this.session);
+            this.listamaquinaria= maquinariadao.listaMaquinaria();
 
             this.transaction.commit();
             
-            return this.listafamilia;
+            return this.listamaquinaria;
 //            System.out.println(listaTEmpresa.size());
         }
         catch (Exception ex) {
             System.out.println("ERROR :"+ex.getMessage());
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
+            
+            //messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
             
             return null;
         }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
             
     }
-    
-    public String update()
-    {
-        this.session=null;
-        this.transaction=null;
-        
-        try {
-            
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            if (chkestado==true) {                
-                this.mfamilia.setChrestado('A');
-            }else{                
-                this.mfamilia.setChrestado('I');
-            }
-            
-            familiadao.ActualizarFamilia(this.session,this.mfamilia);
 
-            this.transaction.commit();
-            
-            messageInfo("Correcto: Los cambios fueron guardados correctamente");
-            
-            insert = Boolean.TRUE;
-
-        }
-        catch (Exception ex) {
-            System.out.println("ERROR :"+ex.getMessage());
-            if (this.transaction!=null){
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
-            
-        }
-            finally
-            {
-                if (this.session!=null){
-                    this.session.close();
-                }
-            }
-            return "/MANTENIMIENTOS/FrmManttoFamilia";
+    public Session getSession() {
+        return session;
     }
-    
-    public void cargarCombos(){
-        this.session=null;
-        this.transaction=null;
-        
-        try {
-            
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-        //CARGAR COMBOS
-            
-            char op=this.mfamilia.getChrestado();
-            if (op=='A') {
-                chkestado=true;
-            }else{
-                chkestado=false;
-            }
-            insert = Boolean.FALSE;
-            
-            }
-            catch (Exception ex) {
-                System.out.println("ERROR :"+ex.getMessage());
-                if (this.transaction!=null){
-                    this.transaction.rollback();
-                }
-                messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
 
-            }
-                finally
-                {
-                    if (this.session!=null){
-                        this.session.close();
-                    }
-                }
-        }
-    
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public MaquinariaDAO getMaquinariadao() {
+        return maquinariadao;
+    }
+
+    public void setMaquinariadao(MaquinariaDAO maquinariadao) {
+        this.maquinariadao = maquinariadao;
+    }
+
+    public MaquinariaTO getMmaquinaria() {
+        return mmaquinaria;
+    }
+
+    public void setMmaquinaria(MaquinariaTO mmaquinaria) {
+        this.mmaquinaria = mmaquinaria;
+    }
+
+    public String getNombremaq() {
+        return nombremaq;
+    }
+
+    public void setNombremaq(String nombremaq) {
+        this.nombremaq = nombremaq;
+    }
+
+    public String getCatmaq() {
+        return catmaq;
+    }
+
+    public void setCatmaq(String catmaq) {
+        this.catmaq = catmaq;
+    }
+
+    public List<MaquinariaTO> getListamaquinaria() {
+        return listamaquinaria;
+    }
+
+    public void setListamaquinaria(List<MaquinariaTO> listamaquinaria) {
+        this.listamaquinaria = listamaquinaria;
+    }
+
     public Boolean getInsert() {
         return insert;
     }
-    
+
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
 
-    public List<Mfamilia> getListaCargoFiltrado() {
-        return listaFamiliaFiltrado;
-    }
-
-    public void setListaCargoFiltrado(List<Mfamilia> listaFamiliaFiltrado) {
-        this.listaFamiliaFiltrado = listaFamiliaFiltrado;
-    }
-
-    
-    public boolean isChkestado() {
+    public Boolean getChkestado() {
         return chkestado;
     }
 
-    public void setChkestado(boolean chkestado) {
+    public void setChkestado(Boolean chkestado) {
         this.chkestado = chkestado;
     }
-
     
     
-    
-    
-    }
+}
 
 
 
