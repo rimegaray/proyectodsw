@@ -57,9 +57,10 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     }
 
     public String registrarCate(){
-        System.out.println("sdsd: "+nombremaq);
-        System.out.println("sdsd: "+catmaq);
+        System.out.println("nombre: "+nombremaq);
+        System.out.println("categoria: "+catmaq);
         try {
+            
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
         
@@ -85,6 +86,7 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         }else{
             messageError("NO Se realizo la creación del Nivel");
         }
+
         }
         catch (Exception ex) {
            
