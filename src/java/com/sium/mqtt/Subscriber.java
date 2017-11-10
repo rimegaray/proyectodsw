@@ -33,6 +33,8 @@ public class Subscriber {
             client.setCallback(new SubscribeCallback());
             client.connect();
             client.subscribe("/soldexa/prensa/1");
+            client.subscribe("/soldexa/prensa/2");
+            client.subscribe("/soldexa/prensa/3");
             //client.subscribe("/casa/habitaciones/hab1/luz");
         } catch (MqttException e) {
             e.printStackTrace();

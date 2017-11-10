@@ -36,8 +36,10 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     String nombremaq;
     String catmaq;
     
-    public  static String estado;
-    
+    public String estado1=null;
+    public String estado2=null;
+    public String estado3=null;
+
     private List<MaquinariaTO> listamaquinaria;
 
     private Boolean insert = Boolean.TRUE;
@@ -50,7 +52,15 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
        
     }
     public void cargarEstado(){
-        System.out.println("oie este es mi estado "+ estado);
+        System.out.println("oie este es mi estado "+ estado1);
+        System.out.println("oie este es mi estado "+ estado2);
+        System.out.println("oie este es mi estado "+ estado3);
+        //estado1 = MaquinaEstado.estadoMaq1;
+        //estado2 = MaquinaEstado.estadoMaq2;
+        //estado3 = MaquinaEstado.estadoMaq3; 
+        estado1 = MaquinaEstado.estadosMaq.get("1");
+        estado2 = MaquinaEstado.estadosMaq.get("2");
+        estado3 = MaquinaEstado.estadosMaq.get("3");
     }
     
     private void initInstancia(){        
@@ -271,7 +281,29 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     }
 
     
-    
+     public String getEstado1() {
+        return estado1;
+    }
+
+    public void setEstado1(String estado1) {
+        this.estado1 = estado1;
+    }
+
+    public String getEstado2() {
+        return estado2;
+    }
+
+    public void setEstado2(String estado2) {
+        this.estado2 = estado2;
+    }
+
+    public String getEstado3() {
+        return estado3;
+    }
+
+    public void setEstado3(String estado3) {
+        this.estado3 = estado3;
+    }
     
     
     

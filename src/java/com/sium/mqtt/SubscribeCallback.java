@@ -5,6 +5,7 @@
  */
 package com.sium.mqtt;
 
+import com.pe.proydsw.bean.MaquinaEstado;
 import com.pe.proydsw.bean.MaquinariaMBR;
 import com.sium.controlador.ControladorEstadistica;
 import com.sium.dao.to.MaquinariaTO;
@@ -22,7 +23,7 @@ public class SubscribeCallback implements MqttCallback {
     private MaquinariaTO mmaquinaria;
     private ControladorEstadistica controlador;
     public String estado;
-    
+    public String maquinaria;
 
     public SubscribeCallback() {
     }
@@ -31,10 +32,23 @@ public class SubscribeCallback implements MqttCallback {
         StringTokenizer token = new StringTokenizer(cadena, "\\.");
         if (token.nextToken().equals("ESTADO")) {
             
-            token.nextToken();
+            this.maquinaria = token.nextToken();
             this.estado = token.nextToken();
             
-            MaquinariaMBR.estado = this.estado;
+            MaquinaEstado.estadosMaq.put(maquinaria, estado);
+            /*if(maquinaria.equals("1")){
+                //MaquinaEstado.estadoMaq1 = this.estado;
+                MaquinaEstado.estadosMaq.put(maquinaria, estado);
+            }
+            else if(maquinaria.equals("2")){
+                MaquinaEstado.estadoMaq2 = this.estado;
+            }
+            
+            else if(maquinaria.equals("3")){
+                MaquinaEstado.estadoMaq3 = this.estado;
+            }*/
+            
+            //MaquinariaMBR.estado = this.estado;
             System.out.println("estado en CAllback"+estado);
         }
           
@@ -70,6 +84,14 @@ public class SubscribeCallback implements MqttCallback {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getMaquinaria() {
+        return maquinaria;
+    }
+
+    public void setMaquinaria(String maquinaria) {
+        this.maquinaria = maquinaria;
     }
     
     

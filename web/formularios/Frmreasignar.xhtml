@@ -19,16 +19,27 @@
                     <h:form id="frmListaMaquinarias">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
                         <p:panel style="width: 100%; margin-top: 5%" id="paneltable">
-
-                            <h:outputText value="OIE CY"/>
                             
-                            <h:outputText value="#"/>
+                            <p:row>
+                                <p:column>
+                                    <h:outputText value="MAQUINARIA 1: "/>
+                                    <h:outputText value="#{maquinariaMBR.estado1}"/>
+                                </p:column>
+                            
+                                <p:column>
+                                    <h:outputText value="MAQUINARIA 2: "/>
+                                    <h:outputText value="#{maquinariaMBR.estado2}"/>
+                                </p:column>
+                                
+                                <p:column>
+                                    <h:outputText value="MAQUINARIA 3: "/>
+                                    <h:outputText value="#{maquinariaMBR.estado3}"/>
+                                </p:column>
+                            </p:row>
                             
                             
-
-
                         </p:panel>
-                        <p:poll interval="2" listener="#{maquinariaMBR.cargarEstado()}" update="paneltable" />
+                        <p:poll interval="1" listener="#{maquinariaMBR.cargarEstado()}" update="paneltable" />
 
 
                     </h:form>
