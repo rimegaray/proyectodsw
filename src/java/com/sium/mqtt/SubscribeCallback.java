@@ -5,7 +5,9 @@
  */
 package com.sium.mqtt;
 
+import com.pe.proydsw.bean.MaquinariaMBR;
 import com.sium.controlador.ControladorEstadistica;
+import com.sium.dao.to.MaquinariaTO;
 import com.sium.estadistica.Paquete;
 import java.util.StringTokenizer;
 import org.eclipse.paho.client.mqttv3.*;
@@ -17,29 +19,28 @@ import org.eclipse.paho.client.mqttv3.*;
 public class SubscribeCallback implements MqttCallback {
 
     private Paquete paquete;
+    private MaquinariaTO mmaquinaria;
     private ControladorEstadistica controlador;
+    public String estado;
+    
 
     public SubscribeCallback() {
     }
-
+   //asa
     private void desempaquetar(String cadena) {
         StringTokenizer token = new StringTokenizer(cadena, "\\.");
-        if (token.nextToken().equals("CAMBIO")) {
-            paquete = new Paquete();
-            System.out.println(paquete);
-            paquete.setCodigoMaquinaria(token.nextToken());
-            System.out.println(paquete);
-            paquete.setTurno(Integer.valueOf(token.nextToken()));
-            System.out.println(paquete);
-            paquete.setHoraInicio(token.nextToken());
-            System.out.println(paquete);
-            paquete.setHoraFin(token.nextToken());
-            System.out.println(paquete);
-            procesarPaquete(paquete);
+        if (token.nextToken().equals("ESTADO")) {
+            
+            token.nextToken();
+            this.estado = token.nextToken();
+            
+            MaquinariaMBR.estado = this.estado;
+            System.out.println("estado en CAllback"+estado);
         }
           
     }
-
+    
+    
     private void procesarPaquete(Paquete paquete) {
         controlador = new ControladorEstadistica(paquete);
         controlador.guardarRegistro();
@@ -63,4 +64,14 @@ public class SubscribeCallback implements MqttCallback {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
+    
 }
