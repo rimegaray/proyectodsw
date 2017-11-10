@@ -8,6 +8,8 @@ package com.pe.proydsw.bean;
 import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.to.MaquinariaTO;
+import com.sium.mqtt.SubscribeCallback;
+import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +32,11 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     
     private MaquinariaDAO maquinariadao;
     private MaquinariaTO mmaquinaria;
-    
+    private Subscriber suscriber;
     String nombremaq;
     String catmaq;
     
+    public  static String estado;
     
     private List<MaquinariaTO> listamaquinaria;
 
@@ -43,13 +46,21 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     @PostConstruct
     private void init(){
         initInstancia();
-//        initlistDep();
+//        initli
+       
+    }
+    public void cargarEstado(){
+        System.out.println("oie este es mi estado "+ estado);
     }
     
     private void initInstancia(){        
         this.mmaquinaria = new MaquinariaTO();
+        System.out.println("hola we");
         this.maquinariadao = new MaquinariaDAO(); 
         this.listamaquinaria = new ArrayList();
+       this.suscriber = new Subscriber();
+        suscriber.start();
+        
         chkestado = true;
     }
     
@@ -57,10 +68,9 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     }
 
     public String registrarCate(){
-        System.out.println("nombre: "+nombremaq);
-        System.out.println("categoria: "+catmaq);
+        System.out.println("sdsd: "+nombremaq);
+        System.out.println("sdsd: "+catmaq);
         try {
-            
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
         
@@ -74,8 +84,8 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
             
             
             this.mmaquinaria.setCodigoMaquinaria(idCate);
-            this.mmaquinaria.setNombre(nombremaq);
-            this.mmaquinaria.setCategoria(catmaq);
+            //this.mmaquinaria.setNombre(nombremaq);
+            //this.mmaquinaria.setCategoria(catmaq);
 //            System.out.println(nombremaq);
             
             
@@ -86,7 +96,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         }else{
             messageError("NO Se realizo la creación del Nivel");
         }
-
         }
         catch (Exception ex) {
            
