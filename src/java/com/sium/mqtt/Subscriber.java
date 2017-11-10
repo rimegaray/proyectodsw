@@ -16,9 +16,9 @@ public class Subscriber {
 
     public static final String BROKER_URL = "tcp://0.0.0.0:1883";
     private MqttClient client;
-
+    private String estado;
     public Subscriber() {
-
+        
         String clientId = "soldexa";
         try {
             client = new MqttClient(BROKER_URL, clientId);
@@ -32,7 +32,7 @@ public class Subscriber {
         try {
             client.setCallback(new SubscribeCallback());
             client.connect();
-            client.subscribe("casa/habitaciones/hab1/luz");
+            client.subscribe("/soldexa/prensa/1");
             //client.subscribe("/casa/habitaciones/hab1/luz");
         } catch (MqttException e) {
             e.printStackTrace();
