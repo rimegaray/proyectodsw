@@ -41,11 +41,10 @@
                                         <p:outputLabel  value="Categoria :" for="CatMaq" style="font-family: arial;font-size: 11px"/>
                                     </p:column>
 
-                                    <p:column>
+                                     <p:column>
                                         <p:selectOneMenu id="CatMaq" value="#{maquinariaMBR.catmaq}" style="font-family: arial;width: 180px">                                        
-                                            <f:selectItem itemValue="0" itemLabel="Seleccione Categoria de Maquinaria"/>                                             
-                                            <f:selectItem itemValue="Montacargas" itemLabel="Montacargas"/>
-                                            <f:selectItem itemValue="Prensas" itemLabel="Prensas"/>
+                                            <f:selectItem itemValue="" itemLabel="Seleccione Categoria de Maquinaria"/>                                             
+                                            <f:selectItems value="#{categoriaMBR.listadoCategoria}"
                                             <f:validator validatorId="validatorCombox"/>    
                                         </p:selectOneMenu>
                                     </p:column>
