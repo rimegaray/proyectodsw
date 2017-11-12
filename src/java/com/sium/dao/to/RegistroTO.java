@@ -11,7 +11,7 @@ package com.sium.dao.to;
  */
 public class RegistroTO {
 
-    private String codigoMaquinaria;
+    private Integer codigoMaquinaria;
     private String fecha;
     private String horaInicio;
     private String horaFin;
@@ -21,17 +21,12 @@ public class RegistroTO {
     public RegistroTO() {
     }
 
-    /**
-     * @return the codigoMaquinaria
-     */
-    public String getCodigoMaquinaria() {
+    public Integer getCodigoMaquinaria() {
         return codigoMaquinaria;
     }
 
-    /**
-     * @param codigoMaquinaria the codigoMaquinaria to set
-     */
-    public void setCodigoMaquinaria(String codigoMaquinaria) {
+    
+    public void setCodigoMaquinaria(Integer codigoMaquinaria) {    
         this.codigoMaquinaria = codigoMaquinaria;
     }
 

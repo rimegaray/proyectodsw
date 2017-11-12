@@ -8,7 +8,6 @@ package com.pe.proydsw.bean;
 import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.to.MaquinariaTO;
-import com.sium.mqtt.SubscribeCallback;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
 import java.util.ArrayList;

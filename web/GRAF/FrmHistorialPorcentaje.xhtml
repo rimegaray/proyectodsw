@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+    </h:head>
+    <body>
+
+
+        <ui:composition template="./../template/layout.xhtml">
+            <ui:define name="content">
+
+                <div class="Container100 ui-fluid">
+                    <div class="Card">
+                        <div class="CardTopic">Mantenimientos Preventivos en el año:<i class="icon-chart-bar Fright Fs30"></i></div>
+                        <div class="Separator"></div>
+
+                        <script src="https://code.highcharts.com/highcharts.js"></script>
+                        <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+                        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+                        <div id="container" style="height: 400px"></div>
+
+
+                        <script>
+
+                            Highcharts.chart('container', {
+                                chart: {
+                                    type: 'column',
+                                    options3d: {
+                                        enabled: true,
+                                        alpha: 15,
+                                        beta: 15,
+                                        viewDistance: 25,
+                                        depth: 40
+                                    }
+                                },
+
+                                title: {
+                                    text: 'Mantenimientos Preventivos Ejecutados- 2017'
+                                },
+
+                                xAxis: {
+                                    categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+                                },
+
+                                yAxis: {
+                                    allowDecimals: false,
+                                    min: 0,
+                                    title: {
+                                        text: 'Numero de Mantenimientos'
+                                    }
+                                },
+
+                                tooltip: {
+                                    headerFormat: '<b>{point.key}</b>',
+                                    pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} / {point.stackTotal}'
+                                },
+
+                                plotOptions: {
+                                    column: {
+                                        stacking: 'normal',
+                                        depth: 40
+                                    }
+                                },
+
+                                series: [{
+                                        name: 'Cumplen (INTERNO)',
+                                        data: [#{registroMBR.calcularActividades()}],
+                                        stack: 'male'
+                                    }]
+                            });
+
+                        </script>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="left">
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

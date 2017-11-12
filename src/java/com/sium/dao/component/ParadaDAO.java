@@ -52,7 +52,7 @@ public class ParadaDAO implements IParadaDAO {
     }
 
     @Override
-    public List<ParadaTO> listaParadas(int turno, String codigoMaquinaria, String fecha) {
+    public List<ParadaTO> listaParadas(int turno, Integer codigoMaquinaria, String fecha) {
         List<ParadaTO> listaParadas = new ArrayList<ParadaTO>();
         try {
             collection = database.getCollection("paradas");

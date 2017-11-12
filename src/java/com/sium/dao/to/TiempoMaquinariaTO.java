@@ -10,7 +10,7 @@ package com.sium.dao.to;
  * @author Aisac
  */
 public class TiempoMaquinariaTO {
-    private String codigoMaquinaria;
+    private Integer codigoMaquinaria;
     private String fecha;
     private Integer tiempoNoUso;
     private Integer tiempoUso;
@@ -23,14 +23,14 @@ public class TiempoMaquinariaTO {
     /**
      * @return the codigoMaquinaria
      */
-    public String getCodigoMaquinaria() {
+    public Integer getCodigoMaquinaria() {
         return codigoMaquinaria;
     }
 
     /**
      * @param codigoMaquinaria the codigoMaquinaria to set
      */
-    public void setCodigoMaquinaria(String codigoMaquinaria) {
+    public void setCodigoMaquinaria(Integer codigoMaquinaria) {
         this.codigoMaquinaria = codigoMaquinaria;
     }
 

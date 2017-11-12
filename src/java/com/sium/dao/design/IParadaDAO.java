@@ -14,5 +14,5 @@ import java.util.List;
  */
 public interface IParadaDAO {
     abstract public String insertarParada(ParadaTO parada);
-    abstract public List<ParadaTO> listaParadas(int turno, String codigoMaquinaria, String fecha);
+    abstract public List<ParadaTO> listaParadas(int turno, Integer codigoMaquinaria, String fecha);
 }

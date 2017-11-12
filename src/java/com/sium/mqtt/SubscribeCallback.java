@@ -6,9 +6,7 @@
 package com.sium.mqtt;
 
 import com.pe.proydsw.bean.MaquinaEstado;
-import com.pe.proydsw.bean.MaquinariaMBR;
 import com.sium.controlador.ControladorEstadistica;
-import com.sium.dao.to.MaquinariaTO;
 import com.sium.estadistica.Paquete;
 import java.util.StringTokenizer;
 import org.eclipse.paho.client.mqttv3.*;
@@ -19,42 +17,32 @@ import org.eclipse.paho.client.mqttv3.*;
  */
 public class SubscribeCallback implements MqttCallback {
 
-    private Paquete paquete;
-    private MaquinariaTO mmaquinaria;
+    private Paquete paquete;    
     private ControladorEstadistica controlador;
     public String estado;
     public String maquinaria;
 
     public SubscribeCallback() {
     }
-   //asa
+    
+
     private void desempaquetar(String cadena) {
         StringTokenizer token = new StringTokenizer(cadena, "\\.");
         if (token.nextToken().equals("ESTADO")) {
-            
             this.maquinaria = token.nextToken();
             this.estado = token.nextToken();
-            
             MaquinaEstado.estadosMaq.put(maquinaria, estado);
-            /*if(maquinaria.equals("1")){
-                //MaquinaEstado.estadoMaq1 = this.estado;
-                MaquinaEstado.estadosMaq.put(maquinaria, estado);
-            }
-            else if(maquinaria.equals("2")){
-                MaquinaEstado.estadoMaq2 = this.estado;
-            }
-            
-            else if(maquinaria.equals("3")){
-                MaquinaEstado.estadoMaq3 = this.estado;
-            }*/
-            
-            //MaquinariaMBR.estado = this.estado;
-            System.out.println("estado en CAllback"+estado);
+        } else if (token.nextToken().equals("CAMBIO")) {
+            paquete = new Paquete();
+            paquete.setCodigoMaquinaria(Integer.valueOf(token.nextToken()));
+            paquete.setTurno(Integer.valueOf(token.nextToken()));
+            paquete.setHoraInicio(token.nextToken());
+            paquete.setHoraFin(token.nextToken());
+            procesarPaquete(paquete);
         }
-          
+
     }
-    
-    
+
     private void procesarPaquete(Paquete paquete) {
         controlador = new ControladorEstadistica(paquete);
         controlador.guardarRegistro();
@@ -70,7 +58,7 @@ public class SubscribeCallback implements MqttCallback {
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         System.out.println("inicio");
         this.desempaquetar(message.toString());
-        
+
     }
 
     @Override
@@ -93,7 +81,5 @@ public class SubscribeCallback implements MqttCallback {
     public void setMaquinaria(String maquinaria) {
         this.maquinaria = maquinaria;
     }
-    
-    
-    
+
 }

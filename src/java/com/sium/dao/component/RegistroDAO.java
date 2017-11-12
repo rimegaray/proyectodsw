@@ -53,7 +53,7 @@ public class RegistroDAO implements IRegistroDAO {
     }
 
     @Override
-    public List<RegistroTO> listaRegistro(int turno, String codigoMaquinaria, String fecha) {
+    public List<RegistroTO> listaRegistro(int turno, Integer codigoMaquinaria, String fecha) {
         List<RegistroTO> listaRegistros = new ArrayList<>();
         try {
             collection = database.getCollection("registros");
@@ -70,6 +70,37 @@ public class RegistroDAO implements IRegistroDAO {
                     registro.setCodigoMaquinaria(codigoMaquinaria);
                     registro.setTurno(turno);
                     registro.setFecha(fecha);
+                    registro.setHoraInicio(dregistro.getString("horaInicio"));
+                    registro.setHoraFin(dregistro.getString("horaFin"));
+                    registro.setPorcentajeUtilizacion(dregistro.getDouble("porcentajeUtilizacion"));
+                    listaRegistros.add(registro);
+                }
+            } else {
+                System.out.println("No existe registros");
+            }
+        } catch (MongoException e) {
+            System.out.println(e.getMessage());
+        }
+        return listaRegistros;
+    }
+    
+    @Override
+    public List<RegistroTO> listaRegistroxId( Integer codigoMaquinaria) {
+        List<RegistroTO> listaRegistros = new ArrayList<>();
+        try {
+            collection = database.getCollection("registros");
+            FindIterable<Document> findIterable = collection.find(
+                    and(
+                            eq("codigoMaquinaria",codigoMaquinaria)
+                            
+                    )
+            );
+            if (findIterable != null) {
+                for (Document dregistro : findIterable) {
+                    RegistroTO registro = new RegistroTO();
+                    registro.setCodigoMaquinaria(codigoMaquinaria);
+                    registro.setTurno(dregistro.getInteger("turno"));
+                    registro.setFecha(dregistro.getString("fecha"));
                     registro.setHoraInicio(dregistro.getString("horaInicio"));
                     registro.setHoraFin(dregistro.getString("horaFin"));
                     registro.setPorcentajeUtilizacion(dregistro.getDouble("porcentajeUtilizacion"));

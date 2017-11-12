@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface IRegistroDAO {
     abstract public  String insertRegistro(RegistroTO registro);
-    abstract public List<RegistroTO> listaRegistro(int turno, String codigoMaquinaria, String fecha);
+    abstract public List<RegistroTO> listaRegistro(int turno, Integer codigoMaquinaria, String fecha);
+    abstract public List<RegistroTO> listaRegistroxId( Integer codigoMaquinaria);
 }
