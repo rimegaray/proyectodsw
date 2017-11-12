@@ -61,22 +61,19 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
     private void init() {
         initInstancia();
         initlistDep();
-
+        
     }
 
     private void initInstancia() {
         this.mcategoria = new CategoriaTO();
-
         this.categoriadao = new CategoriaDAO();
         this.listacategoria = new ArrayList();
-
     }
 
     private void initlistDep() {
-        
         this.listacategoria = categoriadao.listaCategoria();
     }
-
+    
     public String registrarCate() {
 
         try {

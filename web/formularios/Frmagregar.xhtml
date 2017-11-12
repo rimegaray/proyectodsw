@@ -42,9 +42,9 @@
                                     </p:column>
 
                                      <p:column>
-                                        <p:selectOneMenu id="CatMaq" value="#{maquinariaMBR.catmaq}" style="font-family: arial;width: 180px">                                        
+                                         <p:selectOneMenu id="CatMaq" value="" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="" itemLabel="Seleccione Categoria de Maquinaria"/>                                             
-                                            <f:selectItems value="#{categoriaMBR.listacategoria}"
+                                            <f:selectItems value="#{categoriaMBR.listacategoria}" var="idet" itemLabel="#{idet.nombre}"/>
                                             <f:validator validatorId="validatorCombox"/>    
                                         </p:selectOneMenu>
                                     </p:column>

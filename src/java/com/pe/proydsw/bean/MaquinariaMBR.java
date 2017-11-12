@@ -70,7 +70,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         this.listamaquinaria = new ArrayList();
        this.suscriber = new Subscriber();
         suscriber.start();
-        
         chkestado = true;
     }
     
