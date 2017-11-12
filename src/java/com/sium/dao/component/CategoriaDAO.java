@@ -68,8 +68,8 @@ public class CategoriaDAO implements ICategoriaDAO {
             if (findIterable != null) {
                 for (Document dCategoria : findIterable) {
                     CategoriaTO categoria = new CategoriaTO();
-                    categoria.setCodigoCategoria(dCategoria.getInteger("codigoMaquinaria"));
-                    categoria.setNombre(dCategoria.getString("nombreMaquinaria"));
+                    categoria.setCodigoCategoria(dCategoria.getInteger("codigoCategoria"));
+                    categoria.setNombre(dCategoria.getString("nombreCategoria"));
                     listaCategoria.add(categoria);
                 }
             } else {
