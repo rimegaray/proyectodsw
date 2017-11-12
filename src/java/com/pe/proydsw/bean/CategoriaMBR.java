@@ -60,7 +60,7 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
     @PostConstruct
     private void init() {
         initInstancia();
-
+        initlistDep();
 
     }
 
@@ -73,6 +73,8 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
     }
 
     private void initlistDep() {
+        
+        this.listacategoria = categoriadao.listaCategoria();
     }
 
     public String registrarCate() {
@@ -112,21 +114,6 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
         return "/FORMULARIOS/FrmManttoNivel";
     }
 
-    public List<CategoriaTO> listadoCategoria() {
-
-        try {
-            this.listacategoria = categoriadao.listaCategoria();
-
-            return listacategoria;
-             
-        } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-
-            messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-            return null;
-        }
-
-    }
+    
 
 }
