@@ -19,4 +19,5 @@ public class MaquinaEstado {
     
     public static Map<String,String> estadosMaq = new HashMap<String, String>();
     
+    
 }

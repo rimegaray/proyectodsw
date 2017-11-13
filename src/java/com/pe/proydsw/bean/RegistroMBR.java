@@ -82,7 +82,7 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
         
         this.listaregistro = registrodao.listaRegistroxId(item.getCodigoMaquinaria());
     
-        return "FrmHistorialPorcentaje";
+        return "formularios/FrmHistorialPorcentaje";
     }
     
 

@@ -12,7 +12,9 @@ import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -36,10 +38,8 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     String nombremaq;
     String categoriamaq;
     
-    public String estado1=null;
-    public String estado2=null;
-    public String estado3=null;
-
+    Map<String,String> hashmapestados;
+    
     private List<MaquinariaTO> listamaquinaria;
 
     private Boolean insert = Boolean.TRUE;
@@ -49,19 +49,21 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     private void init(){
         initInstancia();
         listadoMaquinarias();
+        cargarEstado();
 //        initli
        
     }
     public void cargarEstado(){
-        System.out.println("oie este es mi estado "+ estado1);
-        System.out.println("oie este es mi estado "+ estado2);
-        System.out.println("oie este es mi estado "+ estado3);
-        //estado1 = MaquinaEstado.estadoMaq1;
-        //estado2 = MaquinaEstado.estadoMaq2;
-        //estado3 = MaquinaEstado.estadoMaq3; 
-        estado1 = MaquinaEstado.estadosMaq.get("1");
-        estado2 = MaquinaEstado.estadosMaq.get("2");
-        estado3 = MaquinaEstado.estadosMaq.get("3");
+        if(MaquinaEstado.estadosMaq.isEmpty()==false){
+           for (Map.Entry<String, String> entry : MaquinaEstado.estadosMaq.entrySet()) {
+          //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+                if(entry.getValue()!=null){
+                  this.hashmapestados.put(entry.getKey(), entry.getValue());
+                  System.out.println("AQUI HAY UN ESTADOOOO:" + entry.getValue());
+                }
+            } 
+        }
+        
     }
     
     private void initInstancia(){        
@@ -69,14 +71,15 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         System.out.println("hola we");
         this.maquinariadao = new MaquinariaDAO(); 
         this.listamaquinaria = new ArrayList();
-       this.suscriber = new Subscriber();
+        this.hashmapestados = new HashMap<>();
+        this.suscriber = new Subscriber();
         suscriber.start();
         chkestado = true;
     }
     
     private void initlistDep() {
     }
-
+    
     public String registrarCate(){
         System.out.println("sdsd: "+nombremaq);
         System.out.println("sdsd: "+categoriamaq);
@@ -141,73 +144,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
             
     }
     
-
-//    public String cargarcategoria(int id){
-//        this.session=null;
-//        this.transaction=null;
-//        String micategoria = null;
-//        
-//        try {
-//            
-//            this.session = HibernateUtil.getSessionFactory().openSession();
-//            this.transaction = this.session.beginTransaction();
-//            
-//            Maquinaria mimaquina = maquinariadao.ListadoMaquinariaxId(session, id);
-//           micategoria = mimaquina.getCategoria().getVarNombreCategoria();            
-//
-//        }
-//        catch (Exception ex) {
-//            System.out.println("ERROR :"+ex.getMessage());
-//            if (this.transaction!=null){
-//                this.transaction.rollback();
-//            }
-//            messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
-//            
-//        }
-//            finally
-//            {
-//                if (this.session!=null){
-//                    this.session.close();
-//                }
-//            }
-//            return micategoria;
-//    }
-    
-//    public void cargarCombos(){
-//        this.session=null;
-//        this.transaction=null;
-//        
-//        try {
-//            
-//            this.session = HibernateUtil.getSessionFactory().openSession();
-//            this.transaction = this.session.beginTransaction();
-//        //CARGAR COMBOS
-//            
-//            char op=this.mmaquinaria.getChrestado();
-//            if (op=='A') {
-//                chkestado=true;
-//            }else{
-//                chkestado=false;
-//            }
-//            insert = Boolean.FALSE;
-//            
-//            }
-//            catch (Exception ex) {
-//                System.out.println("ERROR :"+ex.getMessage());
-//                if (this.transaction!=null){
-//                    this.transaction.rollback();
-//                }
-//                messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
-//
-//            }
-//                finally
-//                {
-//                    if (this.session!=null){
-//                        this.session.close();
-//                    }
-//                }
-//        }
-
     public Session getSession() {
         return session;
     }
@@ -280,32 +216,12 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         this.categoriamaq = categoriamaq;
     }
 
-    
-    
-     public String getEstado1() {
-        return estado1;
+    public Map<String, String> getHashmapestados() {
+        return hashmapestados;
     }
 
-    public void setEstado1(String estado1) {
-        this.estado1 = estado1;
+    public void setHashmapestados(Map<String, String> hashmapestados) {
+        this.hashmapestados = hashmapestados;
     }
-
-    public String getEstado2() {
-        return estado2;
-    }
-
-    public void setEstado2(String estado2) {
-        this.estado2 = estado2;
-    }
-
-    public String getEstado3() {
-        return estado3;
-    }
-
-    public void setEstado3(String estado3) {
-        this.estado3 = estado3;
-    }
-    
-    
     
 }
