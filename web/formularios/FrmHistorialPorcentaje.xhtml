@@ -22,6 +22,7 @@
                         <div class="CardTopic">Mantenimientos Preventivos en el año:<i class="icon-chart-bar Fright Fs30"></i></div>
                         <div class="Separator"></div>
 
+                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
                         <script src="https://code.highcharts.com/highcharts.js"></script>
                         <script src="https://code.highcharts.com/highcharts-3d.js"></script>
                         <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -31,6 +32,7 @@
 
                         <script>
 
+                            
                             Highcharts.chart('container', {
                                 chart: {
                                     type: 'column',
@@ -44,7 +46,7 @@
                                 },
 
                                 title: {
-                                    text: 'Mantenimientos Preventivos Ejecutados- 2017'
+                                    text: 'Historial de Porcentaje de utilizacion'
                                 },
 
                                 xAxis: {
@@ -73,11 +75,10 @@
 
                                 series: [{
                                         name: 'Cumplen (INTERNO)',
-                                        data: [#{registroMBR.calcularActividades()}],
+                                        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
                                         stack: 'male'
                                     }]
                             });
-
                         </script>
                     </div>
                 </div>

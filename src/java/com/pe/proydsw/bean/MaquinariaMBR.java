@@ -7,7 +7,6 @@ package com.pe.proydsw.bean;
 
 import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.MaquinariaDAO;
-import com.sium.dao.to.CategoriaTO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
@@ -74,7 +73,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     
     private void initInstancia(){        
         this.mmaquinaria = new MaquinariaTO();
-        System.out.println("hola we");
         this.maquinariadao = new MaquinariaDAO(); 
         this.listamaquinaria = new ArrayList();
         this.hashmapestados = new HashMap<>();
@@ -87,8 +85,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     }
     
     public String registrarCate(){
-        System.out.println("sdsd: "+nombremaq);
-        System.out.println("sdsd: "+categoriamaq);
         try {
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
@@ -101,11 +97,9 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
                 idCate=1;
             }
             
-            
             this.mmaquinaria.setCodigoMaquinaria(idCate);
             this.mmaquinaria.setNombre(nombremaq);
             this.mmaquinaria.setCategoria(categoriamaq);
-//            System.out.println(nombremaq);
             
             
             respuesta = maquinariadao.insertMaquinaria(mmaquinaria);
@@ -124,10 +118,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         }
            
         return "/formularios/Frmagregar";
-    }
-    
-    public String limpiarcajas(){
-        return "/FORMULARIOS/FrmManttoNivel";
     }
     
     public List<MaquinariaTO> listadoMaquinarias(){

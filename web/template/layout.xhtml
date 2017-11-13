@@ -10,34 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet library="css" name="cssLayout.css"/>
-        <script type="text/javascript">
-            PrimeFaces.locales['es'] = {
-                closeText: 'Cerrar',
-                prevText: 'Anterior',
-                nextText: 'Siguiente',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-                weekHeader: 'Semana',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                timeOnlyTitle: 'Sólo hora',
-                timeText: 'Tiempo',
-                hourText: 'Hora',
-                minuteText: 'Minuto',
-                secondText: 'Segundo',
-                currentText: 'Fecha actual',
-                ampm: false,
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día',
-                allDayText: 'Todo el día'
-            };
-        </script>
+        
         <title>Soldexa</title>
     </h:head>
 
@@ -57,6 +30,9 @@
                     </span>   
                 </div>
                 <p:tabMenu activeIndex="#{param.i}">
+                    <p:menuitem value="Inicio" outcome="/formularios/Frmindex" icon="ui-icon-star">
+                        <f:param name="i" value="3" />
+                    </p:menuitem>
                     <p:menuitem value="Gestion de Maquinaria"  outcome="/formularios/Frmgestion" icon="ui-icon-star">
                         <f:param name="i" value="0" />                     
                     </p:menuitem>
@@ -65,9 +41,6 @@
                     </p:menuitem>
                     <p:menuitem value="Reasignar Sensor y eliminar" outcome="/formularios/Frmreasignar" icon="ui-icon-star">
                         <f:param name="i" value="2" />
-                    </p:menuitem>
-                    <p:menuitem value="Inicio" outcome="/formularios/Frmindex" icon="ui-icon-star">
-                        <f:param name="i" value="3" />
                     </p:menuitem>
                     <p:menuitem value="Generar Reportes" outcome="/formularios/FrmReportes" icon="ui-icon-star">
                         <f:param name="i" value="4" />
