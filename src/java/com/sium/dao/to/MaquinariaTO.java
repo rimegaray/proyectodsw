@@ -14,7 +14,8 @@ public class MaquinariaTO {
     private String categoria;
     private String nombre;
     private Integer codigoMaquinaria;
-
+    private int estado;
+    
     /**
      * @return the categoria
      */
@@ -50,6 +51,19 @@ public class MaquinariaTO {
     public void setCodigoMaquinaria(Integer codigoMaquinaria) {
         this.codigoMaquinaria = codigoMaquinaria;
     }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    
+
+    
+    
 
     
 }

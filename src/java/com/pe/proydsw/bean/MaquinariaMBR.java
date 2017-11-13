@@ -58,12 +58,18 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
            for (Map.Entry<String, String> entry : MaquinaEstado.estadosMaq.entrySet()) {
           //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
                 if(entry.getValue()!=null){
-                  this.hashmapestados.put(entry.getKey(), entry.getValue());
-                  System.out.println("AQUI HAY UN ESTADOOOO:" + entry.getValue());
+                    int codigoMaq = Integer.parseInt(entry.getKey());
+                    
+                    int posicion=0;
+                    for (MaquinariaTO maquinariaTO : this.listamaquinaria) {
+                        if(maquinariaTO.getCodigoMaquinaria()==codigoMaq){
+                            listamaquinaria.get(posicion).setEstado(Integer.parseInt(entry.getValue()));
+                        }
+                        posicion++;
+                    }
                 }
             } 
         }
-        
     }
     
     private void initInstancia(){        

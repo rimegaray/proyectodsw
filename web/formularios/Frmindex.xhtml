@@ -18,7 +18,7 @@
                     
                     <h:form id="frmListaMaquinarias">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
-                        <p:panelGrid columns="2" id="paneltable">
+                        <p:panel id="paneltable">
                             <p:dataTable rowKey="#" id="tablaListaTEmpresa" var="item" value="#{maquinariaMBR.listamaquinaria}" scrollable="true" scrollHeight="300"  
                                          style="width: 100%"   
                                          emptyMessage="No se encontro información">
@@ -31,23 +31,19 @@
                                 <p:column headerText="Categoria" style="text-align: center;font-family: arial;font-size: 12px;width: 20%"  >
                                     <h:outputText value="#{item.categoria}"/>
                                 </p:column>
-                            
+                                
+                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 12px;width: 50%"  sortBy="#"> >
+                                    <h:outputText value="#{item.estado==1 ? 'ACTIVO':'INACTIVO'}"/>
+                                </p:column>
+                                
                                 <p:column headerText="Detalle" style="text-align: center;font-family: arial;font-size: 9px;width: 15%"  >
                                     <p:commandButton  action="#{registroMBR.verDetalles(item)}"  icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
                                 </p:column>
                             </p:dataTable>
 
-                            <p:dataTable rowKey="#" id="tablaListaTEmpresa1" var="item1" value="#{maquinariaMBR.hashmapestados}" scrollable="true" scrollHeight="300"  
-                                         style="width: 100%"   
-                                         emptyMessage="No se encontro información">
-                                
-                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 12px;width: 50%"  sortBy="#"> >
-                                    <h:outputText value="#{maquinariaMBR.hashmapestados}"/>
-                                </p:column>
-                            </p:dataTable>
-                             <p:poll interval="1" listener="#{maquinariaMBR.cargarEstado()}" update="tablaListaTEmpresa1" />
+                            <p:poll interval="1" listener="#{maquinariaMBR.cargarEstado()}" update="tablaListaTEmpresa" />
 
-                        </p:panelGrid>
+                        </p:panel>
 
                     </h:form>
                     
