@@ -34,7 +34,7 @@
                                     </p:column>
 
                                     <p:column>                                        
-                                        <p:inputText size="5" maxlength="5" id="codNomMaq" value="#{maquinariaMBR.nombremaq}" style="font-family: arial;font-size: 11px"/>                                    
+                                        <p:inputText size="12" maxlength="10" id="codNomMaq" value="#{maquinariaMBR.nombremaq}" style="font-family: arial;font-size: 11px"/>                                    
                                     </p:column>
 
                                     <p:column style="text-align: right">
@@ -42,9 +42,9 @@
                                     </p:column>
 
                                      <p:column>
-                                         <p:selectOneMenu id="CatMaq" value="" style="font-family: arial;width: 180px">                                        
+                                         <p:selectOneMenu id="CatMaq" value="#{maquinariaMBR.categoriamaq}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="" itemLabel="Seleccione Categoria de Maquinaria"/>                                             
-                                            <f:selectItems value="#{categoriaMBR.listacategoria}" var="idet" itemLabel="#{idet.nombre}"/>
+                                            <f:selectItems value="#{categoriaMBR.listacategorianombre}"/>
                                             <f:validator validatorId="validatorCombox"/>    
                                         </p:selectOneMenu>
                                     </p:column>

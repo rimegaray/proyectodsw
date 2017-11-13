@@ -7,6 +7,7 @@ package com.pe.proydsw.bean;
 
 import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.MaquinariaDAO;
+import com.sium.dao.to.CategoriaTO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
@@ -33,7 +34,7 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     private MaquinariaTO mmaquinaria;
     private Subscriber suscriber;
     String nombremaq;
-    String catmaq;
+    String categoriamaq;
     
     public String estado1=null;
     public String estado2=null;
@@ -47,6 +48,7 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     @PostConstruct
     private void init(){
         initInstancia();
+        listadoMaquinarias();
 //        initli
        
     }
@@ -77,7 +79,7 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
 
     public String registrarCate(){
         System.out.println("sdsd: "+nombremaq);
-        System.out.println("sdsd: "+catmaq);
+        System.out.println("sdsd: "+categoriamaq);
         try {
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
@@ -92,8 +94,8 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
             
             
             this.mmaquinaria.setCodigoMaquinaria(idCate);
-            //this.mmaquinaria.setNombre(nombremaq);
-            //this.mmaquinaria.setCategoria(catmaq);
+            this.mmaquinaria.setNombre(nombremaq);
+            this.mmaquinaria.setCategoria(categoriamaq);
 //            System.out.println(nombremaq);
             
             
@@ -270,14 +272,15 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         this.nombremaq = nombremaq;
     }
 
-    public String getCatmaq() {
-        return catmaq;
+    public String getCategoriamaq() {
+        return categoriamaq;
     }
 
-    public void setCatmaq(String catmaq) {
-        this.catmaq = catmaq;
+    public void setCategoriamaq(String categoriamaq) {
+        this.categoriamaq = categoriamaq;
     }
 
+    
     
      public String getEstado1() {
         return estado1;

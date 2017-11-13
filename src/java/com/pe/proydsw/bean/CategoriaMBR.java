@@ -13,6 +13,7 @@ import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.SubscribeCallback;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -32,46 +33,33 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
     private CategoriaDAO categoriadao;
     private CategoriaTO mcategoria;
     private List<CategoriaTO> listacategoria;
-
-    public CategoriaDAO getCategoriadao() {
-        return categoriadao;
-    }
-
-    public void setCategoriadao(CategoriaDAO categoriadao) {
-        this.categoriadao = categoriadao;
-    }
-
-    public CategoriaTO getMcategoria() {
-        return mcategoria;
-    }
-
-    public void setMcategoria(CategoriaTO mcategoria) {
-        this.mcategoria = mcategoria;
-    }
-
-    public List<CategoriaTO> getListacategoria() {
-        return listacategoria;
-    }
-
-    public void setListacategoria(List<CategoriaTO> listacategoria) {
-        this.listacategoria = listacategoria;
-    }
-
+    private List<String> listacategorianombre; 
+    
+   
     @PostConstruct
     private void init() {
         initInstancia();
         initlistDep();
-        
     }
 
     private void initInstancia() {
         this.mcategoria = new CategoriaTO();
         this.categoriadao = new CategoriaDAO();
         this.listacategoria = new ArrayList();
-    }
+        this.listacategorianombre = new ArrayList();    }
 
     private void initlistDep() {
         this.listacategoria = categoriadao.listaCategoria();
+        System.out.println("aqui si llega");
+        listanombrescategorias();
+    }
+    
+    public void listanombrescategorias(){
+        for (CategoriaTO nomcategoria : this.listacategoria) {
+                String nom = nomcategoria.getNombre();
+                this.listacategorianombre.add(nom);
+            //System.out.println(nomcategoria);
+        }
     }
     
     public String registrarCate() {
@@ -110,7 +98,40 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
     public String limpiarcajas() {
         return "/FORMULARIOS/FrmManttoNivel";
     }
+    
+     public CategoriaDAO getCategoriadao() {
+        return categoriadao;
+    }
 
+    public void setCategoriadao(CategoriaDAO categoriadao) {
+        this.categoriadao = categoriadao;
+    }
+
+    public CategoriaTO getMcategoria() {
+        return mcategoria;
+    }
+
+    public void setMcategoria(CategoriaTO mcategoria) {
+        this.mcategoria = mcategoria;
+    }
+
+    public List<CategoriaTO> getListacategoria() {
+        return listacategoria;
+    }
+
+    public void setListacategoria(List<CategoriaTO> listacategoria) {
+        this.listacategoria = listacategoria;
+    }
+
+    public List<String> getListacategorianombre() {
+        return listacategorianombre;
+    }
+
+    public void setListacategorianombre(List<String> listacategorianombre) {
+        this.listacategorianombre = listacategorianombre;
+    }
+
+        
     
 
 }
