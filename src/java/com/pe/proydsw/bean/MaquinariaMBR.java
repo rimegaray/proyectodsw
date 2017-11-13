@@ -131,7 +131,7 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
 //            System.out.println(listaTEmpresa.size());
         }
         catch (Exception ex) {
-            System.out.println("ERROR :"+ex.getMessage());
+            
             
             messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
             

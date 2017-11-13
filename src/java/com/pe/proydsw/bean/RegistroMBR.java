@@ -78,15 +78,46 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
         
     }
 
-    public String verDetalles(MaquinariaTO item){
+    public void verDetalles(MaquinariaTO item){
         
         this.listaregistro = registrodao.listaRegistroxId(item.getCodigoMaquinaria());
+        
+    }
     
-        return "FrmHistorialPorcentaje";
+    public String calcularFechas() {
+        
+        try {
+
+            int N = this.listaregistro.size();
+            String varnomb = null;
+            String varsacado = "";
+            for (int i = 0; i < N; i++) {
+                RegistroTO Obj = new RegistroTO();
+                Obj = this.listaregistro.get(i);
+
+//                BigDecimal duracion = Obj.getVarDuracion();
+//
+//                double duraConv = duracion.doubleValue();
+                varnomb = Obj.getFecha();
+                varsacado += "'" + varnomb + "',";
+//                varsacado+="'" + varnomb+ "',";
+
+            }
+            String vFinal = varsacado;
+//            System.out.println("lll="+vFinal);
+            return vFinal;
+
+        } catch (Exception ex) {
+            System.out.println("ERROR funcion cal:" + ex.getMessage());
+            
+            return null;
+//            messageFatal("Por favor contacte con su administrador" + ex.getMessage());
+
+        }
     }
     
 
-    public String CalcularActividades() {
+    public String calcularPorcentaje() {
         
         try {
 

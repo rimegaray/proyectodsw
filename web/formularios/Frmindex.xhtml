@@ -37,7 +37,7 @@
                                 </p:column>
                                 
                                 <p:column headerText="Detalle" style="text-align: center;font-family: arial;font-size: 9px;width: 15%"  >
-                                    <p:commandButton  action="#{registroMBR.verDetalles(item)}"  icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
+                                    <h:button outcome="/formularios/FrmHistorialPorcentaje"  onclick="#{registroMBR.verDetalles(item)}"  style="font-family: arial;font-size: 11px;"/>
                                 </p:column>
                             </p:dataTable>
 

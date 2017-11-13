@@ -50,14 +50,14 @@
                                 },
 
                                 xAxis: {
-                                    categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+                                    categories: [#{registroMBR.calcularFechas()}]
                                 },
 
                                 yAxis: {
                                     allowDecimals: false,
                                     min: 0,
                                     title: {
-                                        text: 'Numero de Mantenimientos'
+                                        text: '% de Utilizacion'
                                     }
                                 },
 
@@ -75,7 +75,7 @@
 
                                 series: [{
                                         name: 'Cumplen (INTERNO)',
-                                        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                                        data: [#{registroMBR.calcularPorcentaje()}],
                                         stack: 'male'
                                     }]
                             });
