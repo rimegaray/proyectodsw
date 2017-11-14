@@ -10,3 +10,11 @@ body {
 h1 {
     color: #000000;
 }
+
+.styleGreen{
+    background-color: green;
+}
+
+.styleRed{
+    background-color: red;
+}

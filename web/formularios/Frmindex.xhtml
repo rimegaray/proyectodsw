@@ -32,7 +32,8 @@
                                     <h:outputText value="#{item.categoria}"/>
                                 </p:column>
                                 
-                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 12px;width: 50%"  sortBy="#"> >
+                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 12px;width: 50%"  sortBy="#"
+                                          styleClass="#{item.estado==1 ? 'styleGreen' : item.estado==0 ? 'styleRed' : null}"> 
                                     <h:outputText value="#{item.estado==1 ? 'ACTIVO':'INACTIVO'}"/>
                                 </p:column>
                                 
