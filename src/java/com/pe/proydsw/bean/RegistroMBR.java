@@ -9,9 +9,11 @@ import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.CategoriaDAO;
 import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.component.RegistroDAO;
+import com.sium.dao.component.TiempoMaquinariaDAO;
 import com.sium.dao.to.CategoriaTO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.dao.to.RegistroTO;
+import com.sium.dao.to.TiempoMaquinariaTO;
 import com.sium.mqtt.SubscribeCallback;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -26,12 +29,69 @@ import javax.faces.bean.ViewScoped;
  * @author RAUL
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class RegistroMBR extends MensajeSYSUtils implements Serializable {
 
     private RegistroDAO registrodao;
     private RegistroTO mregistro;
     private List<RegistroTO> listaregistro;
+    private TiempoMaquinariaDAO tiempomaquidao;
+    private TiempoMaquinariaTO mtiempomaqui;
+
+    private String nombre;
+    private String categoria;
+    private Integer tiempouso;
+    private Integer tiemponouso;
+
+    public TiempoMaquinariaDAO getTiempomaquidao() {
+        return tiempomaquidao;
+    }
+
+    public void setTiempomaquidao(TiempoMaquinariaDAO tiempomaquidao) {
+        this.tiempomaquidao = tiempomaquidao;
+    }
+
+    public TiempoMaquinariaTO getMtiempomaqui() {
+        return mtiempomaqui;
+    }
+
+    public void setMtiempomaqui(TiempoMaquinariaTO mtiempomaqui) {
+        this.mtiempomaqui = mtiempomaqui;
+    }
+
+    public Integer getTiempouso() {
+        return tiempouso;
+    }
+
+    public void setTiempouso(Integer tiempouso) {
+        this.tiempouso = tiempouso;
+    }
+
+    public Integer getTiemponouso() {
+        return tiemponouso;
+    }
+
+    public void setTiemponouso(Integer tiemponouso) {
+        this.tiemponouso = tiemponouso;
+    }
+    
+    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     public RegistroDAO getRegistrodao() {
         return registrodao;
@@ -57,8 +117,6 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
         this.listaregistro = listaregistro;
     }
 
-   
-
     @PostConstruct
     private void init() {
         initInstancia();
@@ -70,22 +128,31 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
         this.mregistro = new RegistroTO();
         this.registrodao = new RegistroDAO();
         this.listaregistro = new ArrayList();
-
+        this.tiempomaquidao = new TiempoMaquinariaDAO();
+        this.mtiempomaqui = new TiempoMaquinariaTO();
     }
 
     private void initlistDep() {
-        
-        
+
     }
 
-    public void verDetalles(MaquinariaTO item){
+    public void verDetalles(Integer codigo) {
         
-        this.listaregistro = registrodao.listaRegistroxId(item.getCodigoMaquinaria());
+        System.out.println("este es mi codigo"+codigo);
+
+        mtiempomaqui = tiempomaquidao.obtenerTiempoMaquinaria(codigo);
+        this.tiempouso = mtiempomaqui.getTiempoUso();
+        this.tiemponouso = mtiempomaqui.getTiempoNoUso();
         
+        System.out.println(tiempouso);
+        System.out.println(tiemponouso);
+
     }
-    
+
     public String calcularFechas() {
-        
+    
+    
+
         try {
 
             int N = this.listaregistro.size();
@@ -109,16 +176,15 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
 
         } catch (Exception ex) {
             System.out.println("ERROR funcion cal:" + ex.getMessage());
-            
+
             return null;
 //            messageFatal("Por favor contacte con su administrador" + ex.getMessage());
 
         }
     }
-    
 
     public String calcularPorcentaje() {
-        
+
         try {
 
             int N = this.listaregistro.size();
@@ -142,12 +208,11 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
 
         } catch (Exception ex) {
             System.out.println("ERROR funcion cal:" + ex.getMessage());
-            
+
             return null;
 //            messageFatal("Por favor contacte con su administrador" + ex.getMessage());
 
         }
     }
-    
 
 }

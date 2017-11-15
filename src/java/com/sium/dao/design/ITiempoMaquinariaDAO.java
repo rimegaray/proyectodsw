@@ -14,4 +14,5 @@ import com.sium.dao.to.TiempoMaquinariaTO;
 public interface ITiempoMaquinariaDAO {
     abstract String insertarTiempoMaquinaria(TiempoMaquinariaTO tiempoMaquinaria);
     abstract String actualizarTiempoMaquinaria(TiempoMaquinariaTO tiempoMaquinaria);
+    public TiempoMaquinariaTO obtenerTiempoMaquinaria(Integer codigoMaquinaria);
 }

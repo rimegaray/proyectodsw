@@ -29,8 +29,8 @@ public class Estadistica {
             registro.setHoraInicio(paquete.getHoraInicio());
             registro.setHoraFin(paquete.getHoraFin());
             registro.setTurno(paquete.getTurno());
-            tiempoMaquinaria.setCodigoMaquinaria(paquete.getCodigoMaquinaria());
-            tiempoMaquinaria.setTurno(paquete.getTurno());
+//            tiempoMaquinaria.setCodigoMaquinaria(paquete.getCodigoMaquinaria());
+//            tiempoMaquinaria.setTurno(paquete.getTurno());
             this.asignarFecha();
     }
 
@@ -60,7 +60,7 @@ public class Estadistica {
     private void asignarFecha() {
         Fecha fecha = new Fecha();
         registro.setFecha(fecha.getFecha());
-        tiempoMaquinaria.setFecha(fecha.getFecha());
+//        tiempoMaquinaria.setFecha(fecha.getFecha());
     }
 
     public TiempoMaquinariaTO getTiempoMaquinaria() {

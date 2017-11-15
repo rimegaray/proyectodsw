@@ -15,43 +15,46 @@
         <ui:composition template="./../template/layout.xhtml">
             <ui:define name="content">
                 <div align="center" >
-                    
+
                     <h:form id="frmListaMaquinarias">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
-                        <p:panel id="paneltable">
-                            <p:dataTable rowKey="#" id="tablaListaTEmpresa" var="item" value="#{maquinariaMBR.listamaquinaria}" scrollable="true" scrollHeight="300"  
-                                         style="width: 100%"   
+                        
+                            <p:dataTable rowKey="#" id="tablaListaTEmpresa" var="item" value="#{maquinariaMBR.listamaquinaria}" scrollable="true" scrollHeight="550"  
+                                         style="width: 100%;height: 100%;margin-top: 10%"   
                                          emptyMessage="No se encontro información">
-                                
-                                <p:column headerText="Nombres" style="text-align: center;font-family: arial;font-size: 12px;width: 15%"  sortBy="#"> >
+
+                                <p:column headerText="Nombres" style="text-align: center;font-family: arial;font-size: 15px;width: 15%"  sortBy="#"> >
                                     <h:outputText value="#{item.nombre}"/>
-                                    
+
                                 </p:column>
-                                
-                                <p:column headerText="Categoria" style="text-align: center;font-family: arial;font-size: 12px;width: 20%"  >
+
+                                <p:column headerText="Categoria" style="text-align: center;font-family: arial;font-size: 15px;width: 20%"  >
                                     <h:outputText value="#{item.categoria}"/>
                                 </p:column>
-                                
-                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 12px;width: 50%"  sortBy="#"
+
+                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 15px;width: 50%"  sortBy="#"
                                           styleClass="#{item.estado==1 ? 'styleGreen' : item.estado==0 ? 'styleRed' : null}"> 
                                     <h:outputText value="#{item.estado==1 ? 'ACTIVO':'INACTIVO'}"/>
                                 </p:column>
-                                
-                                <p:column headerText="Detalle" style="text-align: center;font-family: arial;font-size: 9px;width: 15%"  >
-                                    <h:button outcome="/formularios/FrmHistorialPorcentaje"  onclick="#{registroMBR.verDetalles(item)}"  style="font-family: arial;font-size: 11px;"/>
+
+                                <p:column headerText="Detalle" style="text-align: center;font-family: arial;font-size: 9px;width: 15%" >
+                                    <p:commandLink    actionListener="#{registroMBR.verDetalles(item.codigoMaquinaria)}" >
+                                        <p:button outcome="/formularios/FrmHistorialPorcentaje" value="pastel"   icon="ui-icon-arrowrefresh-1-w" />
+                                        
+                                    </p:commandLink>
                                 </p:column>
+
                             </p:dataTable>
 
-                            <p:poll interval="1" listener="#{maquinariaMBR.cargarEstado()}" update="tablaListaTEmpresa" />
+                            <p:poll interval="1" listener="#{maquinariaMBR.cargarEstado()}"  update="tablaListaTEmpresa" />
 
-                        </p:panel>
+                       
 
                     </h:form>
-                    
+
                 </div>
             </ui:define>
-            <ui:define name="left">
-            </ui:define>
+            
         </ui:composition>
 
     </body>

@@ -16,6 +16,8 @@ import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.set;
 import com.sium.dao.design.ITiempoMaquinariaDAO;
 import com.sium.dao.to.TiempoMaquinariaTO;
+
+
 import com.sium.mongo.AccesoMongoDB;
 import org.bson.Document;
 
@@ -72,5 +74,29 @@ public class TiempoMaquinariaDAO implements ITiempoMaquinariaDAO {
         );
         return rpta;
     }
-
+    
+    @Override
+    public TiempoMaquinariaTO obtenerTiempoMaquinaria(Integer codigoMaquinaria) {
+        TiempoMaquinariaTO tmaquinaria = new TiempoMaquinariaTO();
+        try {
+            collection = database.getCollection("tiempoMaquinaria");
+            FindIterable<Document> findIterable = collection.find(eq("codigoMaquinaria", codigoMaquinaria));
+            if (findIterable != null) {
+                for (Document dMaquinaria : findIterable) {
+                    tmaquinaria.setCodigoMaquinaria(dMaquinaria.getInteger("codigoMaquinaria"));
+                    tmaquinaria.setFecha(dMaquinaria.getString("fecha"));
+                    tmaquinaria.setTiempoUso((dMaquinaria.getInteger("tiempoUso")));
+                    tmaquinaria.setTiempoNoUso(dMaquinaria.getInteger("tiempoNoUso"));
+                    tmaquinaria.setTurno(dMaquinaria.getInteger("idTurno"));
+                }
+                return tmaquinaria;
+            } else {
+                
+                return null;
+            }
+        } catch (MongoException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

@@ -14,81 +14,53 @@ public class TiempoMaquinariaTO {
     private String fecha;
     private Integer tiempoNoUso;
     private Integer tiempoUso;
-    private int turno;
+    private Integer turno;
 
     public TiempoMaquinariaTO() {
     }
 
-    
-    /**
-     * @return the codigoMaquinaria
-     */
     public Integer getCodigoMaquinaria() {
         return codigoMaquinaria;
     }
 
-    /**
-     * @param codigoMaquinaria the codigoMaquinaria to set
-     */
     public void setCodigoMaquinaria(Integer codigoMaquinaria) {
         this.codigoMaquinaria = codigoMaquinaria;
     }
 
-    /**
-     * @return the fecha
-     */
     public String getFecha() {
         return fecha;
     }
 
-    /**
-     * @param fecha the fecha to set
-     */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    /**
-     * @return the tiempoNoUso
-     */
     public Integer getTiempoNoUso() {
         return tiempoNoUso;
     }
 
-    /**
-     * @param tiempoNoUso the tiempoNoUso to set
-     */
     public void setTiempoNoUso(Integer tiempoNoUso) {
         this.tiempoNoUso = tiempoNoUso;
     }
 
-    /**
-     * @return the tiempoUso
-     */
     public Integer getTiempoUso() {
         return tiempoUso;
     }
 
-    /**
-     * @param tiempoUso the tiempoUso to set
-     */
     public void setTiempoUso(Integer tiempoUso) {
         this.tiempoUso = tiempoUso;
     }
 
-    /**
-     * @return the turno
-     */
-    public int getTurno() {
+    public Integer getTurno() {
         return turno;
     }
 
-    /**
-     * @param turno the turno to set
-     */
-    public void setTurno(int turno) {
+    public void setTurno(Integer turno) {
         this.turno = turno;
     }
+
+    
+    
 
     @Override
     public String toString() {

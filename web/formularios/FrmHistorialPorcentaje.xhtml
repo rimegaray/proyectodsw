@@ -19,7 +19,7 @@
 
                 <div class="Container100 ui-fluid">
                     <div class="Card">
-                        <div class="CardTopic">Mantenimientos Preventivos en el año:<i class="icon-chart-bar Fright Fs30"></i></div>
+                        <div class="CardTopic">Grafica pastel<i class="icon-chart-bar Fright Fs30"></i></div>
                         <div class="Separator"></div>
 
                         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -32,51 +32,43 @@
 
                         <script>
 
-                            
+
                             Highcharts.chart('container', {
                                 chart: {
-                                    type: 'column',
-                                    options3d: {
-                                        enabled: true,
-                                        alpha: 15,
-                                        beta: 15,
-                                        viewDistance: 25,
-                                        depth: 40
-                                    }
+                                    plotBackgroundColor: null,
+                                    plotBorderWidth: null,
+                                    plotShadow: false,
+                                    type: 'pie'
                                 },
-
                                 title: {
-                                    text: 'Historial de Porcentaje de utilizacion'
+                                    text: "HOLAAA"
                                 },
-
-                                xAxis: {
-                                    categories: [#{registroMBR.calcularFechas()}]
-                                },
-
-                                yAxis: {
-                                    allowDecimals: false,
-                                    min: 0,
-                                    title: {
-                                        text: '% de Utilizacion'
-                                    }
-                                },
-
                                 tooltip: {
-                                    headerFormat: '<b>{point.key}</b>',
-                                    pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} / {point.stackTotal}'
+                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                                 },
-
                                 plotOptions: {
-                                    column: {
-                                        stacking: 'normal',
-                                        depth: 40
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: {
+                                            enabled: true,
+                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                            style: {
+                                                color: ( Highcharts.theme ) || 'black'
+                                            }
+                                        }
                                     }
                                 },
-
                                 series: [{
-                                        name: 'Cumplen (INTERNO)',
-                                        data: [#{registroMBR.calcularPorcentaje()}],
-                                        stack: 'male'
+                                        name: 'Brands',
+                                        colorByPoint: true,
+                                        data: [{
+                                                name: 'Tiempo de uso',
+                                                y: #{registroMBR.tiempouso}
+                                            },  {
+                                                name: 'Tiempo de no uso',
+                                                y: #{registroMBR.tiemponouso}
+                                            }]
                                     }]
                             });
                         </script>
