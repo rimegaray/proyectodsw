@@ -8,6 +8,9 @@ package com.pe.proydsw.bean;
 import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.CategoriaDAO;
 import com.sium.dao.component.MaquinariaDAO;
+import com.sium.dao.dao.DAOFactory;
+import com.sium.dao.design.ICategoriaDAO;
+import com.sium.dao.design.ITiempoMaquinariaDAO;
 import com.sium.dao.to.CategoriaTO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.SubscribeCallback;
@@ -19,8 +22,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -30,8 +31,9 @@ import org.hibernate.Transaction;
 @ViewScoped
 public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
 
-    private CategoriaDAO categoriadao;
+    
     private CategoriaTO mcategoria;
+    private ICategoriaDAO categoriaDAO;
     private List<CategoriaTO> listacategoria;
     private List<String> listacategorianombre; 
     
@@ -44,12 +46,12 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
 
     private void initInstancia() {
         this.mcategoria = new CategoriaTO();
-        this.categoriadao = new CategoriaDAO();
+        this.categoriaDAO = DAOFactory.getInstance().getCategoriaDAO();
         this.listacategoria = new ArrayList();
         this.listacategorianombre = new ArrayList();    }
 
     private void initlistDep() {
-        this.listacategoria = categoriadao.listaCategoria();
+        this.listacategoria = categoriaDAO.listaCategoria();
         System.out.println("aqui si llega");
         listanombrescategorias();
     }
@@ -68,7 +70,7 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
             this.mcategoria = new CategoriaTO();
             String respuesta;
 
-            int countReg = categoriadao.ContadorDeRegCategoria();
+            int countReg = categoriaDAO.ContadorDeRegCategoria();
             int idCate = 0;
             if (countReg != 0) {
                 idCate = countReg + 1;
@@ -78,7 +80,7 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
 
             this.mcategoria.setCodigoCategoria(idCate);
 
-            respuesta = categoriadao.insertCategoria(mcategoria);
+            respuesta = categoriaDAO.insertCategoria(mcategoria);
 
             if (respuesta.equals("correcto")) {
                 messageInfo("Se realizo la creación de la Categoria");
@@ -99,13 +101,7 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
         return "/FORMULARIOS/FrmManttoNivel";
     }
     
-     public CategoriaDAO getCategoriadao() {
-        return categoriadao;
-    }
-
-    public void setCategoriadao(CategoriaDAO categoriadao) {
-        this.categoriadao = categoriadao;
-    }
+     
 
     public CategoriaTO getMcategoria() {
         return mcategoria;
@@ -130,6 +126,16 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
     public void setListacategorianombre(List<String> listacategorianombre) {
         this.listacategorianombre = listacategorianombre;
     }
+
+    public ICategoriaDAO getCategoriaDAO() {
+        return categoriaDAO;
+    }
+
+    public void setCategoriaDAO(ICategoriaDAO categoriaDAO) {
+        this.categoriaDAO = categoriaDAO;
+    }
+    
+    
 
         
     

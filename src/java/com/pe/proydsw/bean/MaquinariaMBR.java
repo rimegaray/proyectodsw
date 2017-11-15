@@ -7,6 +7,9 @@ package com.pe.proydsw.bean;
 
 import com.pe.proydsw.utils.MensajeSYSUtils;
 import com.sium.dao.component.MaquinariaDAO;
+import com.sium.dao.dao.DAOFactory;
+import com.sium.dao.design.IMaquinariaDAO;
+import com.sium.dao.design.ITiempoMaquinariaDAO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
@@ -28,10 +31,8 @@ import org.hibernate.Transaction;
 @ViewScoped
 public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{     
     
-    Session session;
-    Transaction transaction;
-    
-    private MaquinariaDAO maquinariadao;
+   
+    private IMaquinariaDAO maquinariaDAO;
     private MaquinariaTO mmaquinaria;
     private Subscriber suscriber;
     String nombremaq;
@@ -71,9 +72,10 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         }
     }
     
-    private void initInstancia(){        
+    private void initInstancia(){   
+        
+        this.maquinariaDAO = DAOFactory.getInstance().getMaquinariaDAO();
         this.mmaquinaria = new MaquinariaTO();
-        this.maquinariadao = new MaquinariaDAO(); 
         this.listamaquinaria = new ArrayList();
         this.hashmapestados = new HashMap<>();
         this.suscriber = new Subscriber();
@@ -88,8 +90,10 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         try {
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
+            
+            
         
-            int countReg=maquinariadao.ContadorDeRegMaquinaria();
+            int countReg=maquinariaDAO.ContadorDeRegMaquinaria();
             int idCate=0;
             if(countReg!=0){
                 idCate=countReg+1;
@@ -102,7 +106,7 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
             this.mmaquinaria.setCategoria(categoriamaq);
             
             
-            respuesta = maquinariadao.insertMaquinaria(mmaquinaria);
+            respuesta = maquinariaDAO.insertMaquinaria(mmaquinaria);
         
         if (respuesta.equals("correcto")){
             messageInfo("Se realizo la creación del Nivel");
@@ -123,9 +127,8 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     public List<MaquinariaTO> listadoMaquinarias(){
         
         try {
-            this.listamaquinaria= maquinariadao.listaMaquinaria();
+            this.listamaquinaria= maquinariaDAO.listaMaquinaria();
 
-            this.transaction.commit();
             
             return this.listamaquinaria;
 //            System.out.println(listaTEmpresa.size());
@@ -140,30 +143,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
             
     }
     
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
-
-    public MaquinariaDAO getMaquinariadao() {
-        return maquinariadao;
-    }
-
-    public void setMaquinariadao(MaquinariaDAO maquinariadao) {
-        this.maquinariadao = maquinariadao;
-    }
-
     public MaquinariaTO getMmaquinaria() {
         return mmaquinaria;
     }
@@ -195,6 +174,16 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     public void setChkestado(Boolean chkestado) {
         this.chkestado = chkestado;
     }
+
+    public IMaquinariaDAO getMaquinariaDAO() {
+        return maquinariaDAO;
+    }
+
+    public void setMaquinariaDAO(IMaquinariaDAO maquinariaDAO) {
+        this.maquinariaDAO = maquinariaDAO;
+    }
+    
+    
 
     public String getNombremaq() {
         return nombremaq;

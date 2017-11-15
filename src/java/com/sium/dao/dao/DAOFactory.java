@@ -5,11 +5,13 @@
  */
 package com.sium.dao.dao;
 
+import com.sium.dao.component.CategoriaDAO;
 import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.component.ParadaDAO;
 import com.sium.dao.component.RegistroDAO;
 import com.sium.dao.component.TiempoMaquinariaDAO;
 import com.sium.dao.component.UsuarioDAO;
+import com.sium.dao.design.ICategoriaDAO;
 import com.sium.dao.design.IMaquinariaDAO;
 import com.sium.dao.design.IParadaDAO;
 import com.sium.dao.design.IRegistroDAO;
@@ -31,9 +33,7 @@ public class DAOFactory {
         return daoFac;
     }
     
-    public IMaquinariaDAO getAlumnoDAO(){
-        return new MaquinariaDAO();
-    }
+    
     
     public IParadaDAO getParadaDAO(){
         return new ParadaDAO();
@@ -49,5 +49,13 @@ public class DAOFactory {
     
     public IUsuarioDAO getUsuarioDAO(){
         return new UsuarioDAO();
+    }
+    
+    public IMaquinariaDAO getMaquinariaDAO(){
+        return new MaquinariaDAO();
+    }
+    
+    public ICategoriaDAO getCategoriaDAO(){
+        return new CategoriaDAO();
     }
 }
