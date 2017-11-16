@@ -16,7 +16,7 @@
 
         <ui:composition template="./../template/layout.xhtml">
             <ui:define name="content">
-
+                <h:form id="frmListaMaquinarias">   
                 <div class="Container100 ui-fluid">
                     <div class="Card">
                         <div class="CardTopic">Grafica pastel<i class="icon-chart-bar Fright Fs30"></i></div>
@@ -28,7 +28,10 @@
                         <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
                         <div id="container" style="height: 400px"></div>
-
+                        
+                        <h:outputText value="#{registroMBR.tiempouso}"/>
+                        <h:outputText value="#{registroMBR.tiemponouso}"/>
+                                
 
 
 
@@ -73,10 +76,15 @@
                                             }]
                                     }]
                             });
+                            
                         </script>
-
+                     
                     </div>
                 </div>
+                    <p:poll stop="true" interval="1" update="frmListaMaquinarias" />
+                </h:form>
+
+
             </ui:define>
             <ui:define name="left">
             </ui:define>

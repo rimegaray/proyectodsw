@@ -42,40 +42,7 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
     private String categoria;
     private Integer tiempouso;
     private Integer tiemponouso;
-
-    public TiempoMaquinariaDAO getTiempomaquidao() {
-        return tiempomaquidao;
-    }
-
-    public void setTiempomaquidao(TiempoMaquinariaDAO tiempomaquidao) {
-        this.tiempomaquidao = tiempomaquidao;
-    }
-
-    public TiempoMaquinariaTO getMtiempomaqui() {
-        return mtiempomaqui;
-    }
-
-    public void setMtiempomaqui(TiempoMaquinariaTO mtiempomaqui) {
-        this.mtiempomaqui = mtiempomaqui;
-    }
-
-    public Integer getTiempouso() {
-        return tiempouso;
-    }
-
-    public void setTiempouso(Integer tiempouso) {
-        this.tiempouso = tiempouso;
-    }
-
-    public Integer getTiemponouso() {
-        return tiemponouso;
-    }
-
-    public void setTiemponouso(Integer tiemponouso) {
-        this.tiemponouso = tiemponouso;
-    }
-    
-    
+    private Integer codigoMaquinaria;
 
     public String getNombre() {
         return nombre;
@@ -153,9 +120,11 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
 
     }
 
+    public void cargarImagen(){
+        
+    }
+    
     public String calcularFechas() {
-    
-    
 
         try {
 
@@ -218,5 +187,37 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
 
         }
     }
+    
+    public TiempoMaquinariaDAO getTiempomaquidao() {
+        return tiempomaquidao;
+    }
 
+    public void setTiempomaquidao(TiempoMaquinariaDAO tiempomaquidao) {
+        this.tiempomaquidao = tiempomaquidao;
+    }
+
+    public TiempoMaquinariaTO getMtiempomaqui() {
+        return mtiempomaqui;
+    }
+
+    public void setMtiempomaqui(TiempoMaquinariaTO mtiempomaqui) {
+        this.mtiempomaqui = mtiempomaqui;
+    }
+
+    public Integer getTiempouso() {
+        return tiempouso;
+    }
+
+    public void setTiempouso(Integer tiempouso) {
+        this.tiempouso = tiempouso;
+    }
+
+    public Integer getTiemponouso() {
+        return tiemponouso;
+    }
+
+    public void setTiemponouso(Integer tiemponouso) {
+        this.tiemponouso = tiemponouso;
+    }
+    
 }

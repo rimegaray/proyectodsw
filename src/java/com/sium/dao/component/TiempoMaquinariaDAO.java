@@ -78,10 +78,12 @@ public class TiempoMaquinariaDAO implements ITiempoMaquinariaDAO {
     @Override
     public TiempoMaquinariaTO obtenerTiempoMaquinaria(Integer codigoMaquinaria) {
         TiempoMaquinariaTO tmaquinaria = new TiempoMaquinariaTO();
+        int probando=1;
         try {
             collection = database.getCollection("tiempoMaquinaria");
-            FindIterable<Document> findIterable = collection.find(eq("codigoMaquinaria", codigoMaquinaria));
+            FindIterable<Document> findIterable = collection.find(eq("codigoMaquinaria", String.valueOf(codigoMaquinaria)));
             if (findIterable != null) {
+                probando=0;
                 for (Document dMaquinaria : findIterable) {
                     String codigoMaq;
                     System.out.println("aca1");
