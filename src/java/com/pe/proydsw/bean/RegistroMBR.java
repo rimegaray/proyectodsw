@@ -23,6 +23,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -43,6 +44,7 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
     private Integer tiempouso;
     private Integer tiemponouso;
     private Integer codigoMaquinaria;
+    private int number;
 
     public String getNombre() {
         return nombre;
@@ -154,6 +156,15 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
 //            messageFatal("Por favor contacte con su administrador" + ex.getMessage());
 
         }
+    }
+    
+    public String increment() {
+        number++;
+        System.out.println(number);
+        if(number == 3){
+            return "FrmHistorialPorcentaje";
+        }
+        return null;
     }
 
     public String calcularPorcentaje() {

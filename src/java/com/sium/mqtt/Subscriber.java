@@ -14,7 +14,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
  */
 public class Subscriber {
 
-    public static final String BROKER_URL = "tcp://0.0.0.0:1883";
+    public static final String BROKER_URL = "tcp://ec2-18-220-180-195.us-east-2.compute.amazonaws.com:1883";
     private MqttClient client;
     private String estado;
     public Subscriber() {
@@ -32,9 +32,9 @@ public class Subscriber {
         try {
             client.setCallback(new SubscribeCallback());
             client.connect();
-            client.subscribe("/soldexa/prensa/1");
-            client.subscribe("/soldexa/prensa/2");
-            client.subscribe("/soldexa/prensa/3");
+            client.subscribe("/soldexa/Prensa/1");
+            client.subscribe("/soldexa/Prensa/2");
+            client.subscribe("/soldexa/Prensa/3");
             //client.subscribe("/casa/habitaciones/hab1/luz");
         } catch (MqttException e) {
             e.printStackTrace();

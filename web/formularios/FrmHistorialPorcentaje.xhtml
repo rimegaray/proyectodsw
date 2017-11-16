@@ -81,7 +81,7 @@
                      
                     </div>
                 </div>
-                    <p:poll stop="true" interval="1" update="frmListaMaquinarias" />
+                    <p:poll  interval="5" widgetVar="poll"  listener="#{registroMBR.increment()}" update="frmListaMaquinarias" />
                 </h:form>
 
 

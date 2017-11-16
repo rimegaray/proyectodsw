@@ -6,10 +6,8 @@
 package com.pe.proydsw.bean;
 
 import com.pe.proydsw.utils.MensajeSYSUtils;
-import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.dao.DAOFactory;
 import com.sium.dao.design.IMaquinariaDAO;
-import com.sium.dao.design.ITiempoMaquinariaDAO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
@@ -20,8 +18,6 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -42,21 +38,17 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
     
     private List<MaquinariaTO> listamaquinaria;
 
-    private Boolean insert = Boolean.TRUE;
-    private Boolean chkestado;
-    
     @PostConstruct
     private void init(){
         initInstancia();
         listadoMaquinarias();
         cargarEstado();
-//        initli
        
     }
     public void cargarEstado(){
         if(MaquinaEstado.estadosMaq.isEmpty()==false){
            for (Map.Entry<String, String> entry : MaquinaEstado.estadosMaq.entrySet()) {
-          //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+          
                 if(entry.getValue()!=null){
                     int codigoMaq = Integer.parseInt(entry.getKey());
                     
@@ -78,21 +70,16 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         this.mmaquinaria = new MaquinariaTO();
         this.listamaquinaria = new ArrayList();
         this.hashmapestados = new HashMap<>();
+        
         this.suscriber = new Subscriber();
         suscriber.start();
-        chkestado = true;
     }
     
-    private void initlistDep() {
-    }
     
     public String registrarCate(){
         try {
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
-            
-            
-        
             int countReg=maquinariaDAO.ContadorDeRegMaquinaria();
             int idCate=0;
             if(countReg!=0){
@@ -128,16 +115,10 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
         
         try {
             this.listamaquinaria= maquinariaDAO.listaMaquinaria();
-
-            
             return this.listamaquinaria;
-//            System.out.println(listaTEmpresa.size());
         }
         catch (Exception ex) {
-            
-            
             messageFatal("Error Fatal: Por favor contacte con su administrador"+ex.getMessage());
-            
             return null;
         }
             
@@ -157,22 +138,6 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
 
     public void setListamaquinaria(List<MaquinariaTO> listamaquinaria) {
         this.listamaquinaria = listamaquinaria;
-    }
-
-    public Boolean getInsert() {
-        return insert;
-    }
-
-    public void setInsert(Boolean insert) {
-        this.insert = insert;
-    }
-
-    public Boolean getChkestado() {
-        return chkestado;
-    }
-
-    public void setChkestado(Boolean chkestado) {
-        this.chkestado = chkestado;
     }
 
     public IMaquinariaDAO getMaquinariaDAO() {
