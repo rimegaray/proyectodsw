@@ -16,7 +16,6 @@ public class Subscriber {
 
     public static final String BROKER_URL = "tcp://ec2-18-220-180-195.us-east-2.compute.amazonaws.com:1883";
     private MqttClient client;
-    private String estado;
     public Subscriber() {
         
         String clientId = "soldexa";
@@ -35,7 +34,6 @@ public class Subscriber {
             client.subscribe("/soldexa/Prensa/1");
             client.subscribe("/soldexa/Prensa/2");
             client.subscribe("/soldexa/Prensa/3");
-            //client.subscribe("/casa/habitaciones/hab1/luz");
         } catch (MqttException e) {
             e.printStackTrace();
             System.exit(1);

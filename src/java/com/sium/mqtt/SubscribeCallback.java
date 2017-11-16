@@ -6,8 +6,6 @@
 package com.sium.mqtt;
 
 import com.pe.proydsw.bean.MaquinaEstado;
-import com.sium.controlador.ControladorEstadistica;
-import com.sium.estadistica.Paquete;
 import java.util.StringTokenizer;
 import org.eclipse.paho.client.mqttv3.*;
 
@@ -17,8 +15,7 @@ import org.eclipse.paho.client.mqttv3.*;
  */
 public class SubscribeCallback implements MqttCallback {
 
-    private Paquete paquete;    
-    private ControladorEstadistica controlador;
+      
     public String estado;
     public String maquinaria;
 
@@ -32,22 +29,11 @@ public class SubscribeCallback implements MqttCallback {
             this.maquinaria = token.nextToken();
             this.estado = token.nextToken();
             MaquinaEstado.estadosMaq.put(maquinaria, estado);
-        } else if (token.nextToken().equals("CAMBIO")) {
-            paquete = new Paquete();
-            paquete.setCodigoMaquinaria(Integer.valueOf(token.nextToken()));
-            paquete.setTurno(Integer.valueOf(token.nextToken()));
-            paquete.setHoraInicio(token.nextToken());
-            paquete.setHoraFin(token.nextToken());
-            procesarPaquete(paquete);
-        }
+        } 
 
     }
 
-    private void procesarPaquete(Paquete paquete) {
-        controlador = new ControladorEstadistica(paquete);
-        controlador.guardarRegistro();
-        controlador.guardarTiempoMaquinaria();
-    }
+    
 
     @Override
     public void connectionLost(Throwable thrwbl) {

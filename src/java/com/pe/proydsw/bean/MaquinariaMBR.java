@@ -10,7 +10,6 @@ import com.sium.dao.dao.DAOFactory;
 import com.sium.dao.design.IMaquinariaDAO;
 import com.sium.dao.to.MaquinariaTO;
 import com.sium.mqtt.Subscriber;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{     
+public class MaquinariaMBR extends MensajeSYSUtils{     
     
    
     private IMaquinariaDAO maquinariaDAO;
@@ -91,14 +90,12 @@ public class MaquinariaMBR extends MensajeSYSUtils implements Serializable{
             this.mmaquinaria.setCodigoMaquinaria(idCate);
             this.mmaquinaria.setNombre(nombremaq);
             this.mmaquinaria.setCategoria(categoriamaq);
-            
-            
             respuesta = maquinariaDAO.insertMaquinaria(mmaquinaria);
         
         if (respuesta.equals("correcto")){
-            messageInfo("Se realizo la creación del Nivel");
+            messageInfo("Se realizo la creación de la Maquinaria");
         }else{
-            messageError("NO Se realizo la creación del Nivel");
+            messageError("NO Se realizo la creación de la Maquinaria");
         }
         }
         catch (Exception ex) {

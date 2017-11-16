@@ -17,71 +17,71 @@
         <ui:composition template="./../template/layout.xhtml">
             <ui:define name="content">
                 <h:form id="frmListaMaquinarias">   
-                <div class="Container100 ui-fluid">
-                    <div class="Card">
-                        <div class="CardTopic">Grafica pastel<i class="icon-chart-bar Fright Fs30"></i></div>
-                        <div class="Separator"></div>
+                    <div class="Container100 ui-fluid">
+                        <div class="Card">
+                            <div class="CardTopic">Grafica pastel<i class="icon-chart-bar Fright Fs30"></i></div>
+                            <div class="Separator"></div>
 
-                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-                        <script src="https://code.highcharts.com/highcharts.js"></script>
-                        <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-                        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+                            <script src="https://code.highcharts.com/highcharts.js"></script>
+                            <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+                            <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-                        <div id="container" style="height: 400px"></div>
-                        
-                        <h:outputText value="#{registroMBR.tiempouso}"/>
-                        <h:outputText value="#{registroMBR.tiemponouso}"/>
-                                
+                            <div id="container" style="height: 400px"></div>
 
+                            <h:outputText value="#{tiempoMaquinariaMBR.tiempouso}"/>
+                            <h:outputText value="#{tiempoMaquinariaMBR.tiemponouso}"/>
 
 
-                        <script>
 
 
-                            Highcharts.chart('container', {
-                                chart: {
-                                    plotBackgroundColor: null,
-                                    plotBorderWidth: null,
-                                    plotShadow: false,
-                                    type: 'pie'
-                                },
-                                title: {
-                                    text: "HOLAAA"
-                                },
-                                tooltip: {
-                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                },
-                                plotOptions: {
-                                    pie: {
-                                        allowPointSelect: true,
-                                        cursor: 'pointer',
-                                        dataLabels: {
-                                            enabled: true,
-                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                            style: {
-                                                color: (Highcharts.theme) || 'black'
+                            <script>
+
+
+                                Highcharts.chart('container', {
+                                    chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false,
+                                        type: 'pie'
+                                    },
+                                    title: {
+                                        text: "HOLAAA"
+                                    },
+                                    tooltip: {
+                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                style: {
+                                                    color: (Highcharts.theme) || 'black'
+                                                }
                                             }
                                         }
-                                    }
-                                },
-                                series: [{
-                                        name: 'Brands',
-                                        colorByPoint: true,
-                                        data: [{
-                                                name: 'Tiempo de uso',
-                                                y: #{registroMBR.tiempouso}
-                                            }, {
-                                                name: 'Tiempo de no uso',
-                                                y: #{registroMBR.tiemponouso}
-                                            }]
-                                    }]
-                            });
-                            
-                        </script>
-                     
+                                    },
+                                    series: [{
+                                            name: 'Brands',
+                                            colorByPoint: true,
+                                            data: [{
+                                                    name: 'Tiempo de uso',
+                                                    y: #{tiempoMaquinariaMBR.tiempouso}
+                                                }, {
+                                                    name: 'Tiempo de no uso',
+                                                    y: #{tiempoMaquinariaMBR.tiemponouso}
+                                                }]
+                                        }]
+                                });
+
+                            </script>
+
+                        </div>
                     </div>
-                </div>
-                    <p:poll  interval="5" widgetVar="poll"  listener="#{registroMBR.increment()}" update="frmListaMaquinarias" />
+                    <p:poll  interval="5" widgetVar="poll"   update="frmListaMaquinarias" />
                 </h:form>
 
 
