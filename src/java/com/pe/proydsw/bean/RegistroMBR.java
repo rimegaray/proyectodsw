@@ -130,6 +130,7 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
         this.listaregistro = new ArrayList();
         this.tiempomaquidao = new TiempoMaquinariaDAO();
         this.mtiempomaqui = new TiempoMaquinariaTO();
+        
     }
 
     private void initlistDep() {
@@ -139,10 +140,13 @@ public class RegistroMBR extends MensajeSYSUtils implements Serializable {
     public void verDetalles(Integer codigo) {
         
         System.out.println("este es mi codigo"+codigo);
-
+        
         mtiempomaqui = tiempomaquidao.obtenerTiempoMaquinaria(codigo);
-        this.tiempouso = mtiempomaqui.getTiempoUso();
-        this.tiemponouso = mtiempomaqui.getTiempoNoUso();
+        int tiempototal = mtiempomaqui.getTiempoUso()+mtiempomaqui.getTiempoNoUso();
+        System.out.println("askjaksks"+tiempototal);
+        this.tiempouso = mtiempomaqui.getTiempoUso()*100/tiempototal;
+        
+        this.tiemponouso = mtiempomaqui.getTiempoNoUso()*100/tiempototal;
         
         System.out.println(tiempouso);
         System.out.println(tiemponouso);

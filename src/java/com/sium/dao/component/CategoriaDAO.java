@@ -69,8 +69,8 @@ public class CategoriaDAO implements ICategoriaDAO {
                 for (Document dCategoria : findIterable) {
                     CategoriaTO categoria = new CategoriaTO();
                     //Al insertar en duro, mongo lo guarda como un double --> 1.0
-                    Double codCate = dCategoria.getDouble("codigoCategoria");
-                    categoria.setCodigoCategoria((int) (double) codCate);
+                    //Double codCate = dCategoria.getDouble("codigoCategoria");
+                    categoria.setCodigoCategoria(dCategoria.getInteger("codigoCategoria"));
                     
                     //categoria.setCodigoCategoria(dCategoria.getInteger("codigoCategoria"));
                     categoria.setNombre(dCategoria.getString("nombreCategoria"));

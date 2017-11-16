@@ -83,11 +83,20 @@ public class TiempoMaquinariaDAO implements ITiempoMaquinariaDAO {
             FindIterable<Document> findIterable = collection.find(eq("codigoMaquinaria", codigoMaquinaria));
             if (findIterable != null) {
                 for (Document dMaquinaria : findIterable) {
-                    tmaquinaria.setCodigoMaquinaria(dMaquinaria.getInteger("codigoMaquinaria"));
+                    String codigoMaq;
+                    System.out.println("aca1");
+                    codigoMaq = dMaquinaria.getString("codigoMaquinaria");
+                    tmaquinaria.setCodigoMaquinaria(Integer.valueOf(codigoMaq));
+                    System.out.println("aca1");
+                    
                     tmaquinaria.setFecha(dMaquinaria.getString("fecha"));
+                    System.out.println("aca2");
                     tmaquinaria.setTiempoUso((dMaquinaria.getInteger("tiempoUso")));
+                    System.out.println("aca3");
                     tmaquinaria.setTiempoNoUso(dMaquinaria.getInteger("tiempoNoUso"));
+                    System.out.println("aca4");
                     tmaquinaria.setTurno(dMaquinaria.getInteger("idTurno"));
+                    System.out.println("aca5");
                 }
                 return tmaquinaria;
             } else {
