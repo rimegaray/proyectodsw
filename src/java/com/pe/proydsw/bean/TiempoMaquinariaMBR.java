@@ -92,6 +92,4 @@ public class TiempoMaquinariaMBR extends MensajeSYSUtils  {
         this.tiemponouso = tiemponouso;
     }
     
-    
-    
 }

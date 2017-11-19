@@ -13,11 +13,6 @@ import java.util.Map;
  * @author RAUL
  */
 public class MaquinaEstado {
-    //public static String estadoMaq2;
-    //public static String estadoMaq1;
-    //public static String estadoMaq3;
-    
     public static Map<String,String> estadosMaq = new HashMap<String, String>();
-    
-    
+   
 }

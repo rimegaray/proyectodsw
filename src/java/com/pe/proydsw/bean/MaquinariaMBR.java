@@ -50,7 +50,6 @@ public class MaquinariaMBR extends MensajeSYSUtils{
           
                 if(entry.getValue()!=null){
                     int codigoMaq = Integer.parseInt(entry.getKey());
-                    
                     int posicion=0;
                     for (MaquinariaTO maquinariaTO : this.listamaquinaria) {
                         if(maquinariaTO.getCodigoMaquinaria()==codigoMaq){

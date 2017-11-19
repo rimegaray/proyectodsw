@@ -22,6 +22,8 @@ public class AccesoMongoDB {
         if(db == null){
             try{
             db = new MongoClient(new MongoClientURI("mongodb://aisac:aisac@ds058508.mlab.com:58508/sium"));
+            //db = new MongoClient(new MongoClientURI("mongodb://localhost:27017/sium"));
+
             }catch(MongoException e){
                 System.out.println(e.getMessage());
             }

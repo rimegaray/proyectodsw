@@ -15,6 +15,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 public class Subscriber {
 
     public static final String BROKER_URL = "tcp://ec2-18-220-180-195.us-east-2.compute.amazonaws.com:1883";
+    //public static final String BROKER_URL = "tcp://0.0.0.0:1883";
     private MqttClient client;
     public Subscriber() {
         
