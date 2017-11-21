@@ -31,6 +31,12 @@
 
 
 
+                        </div>
+                    </div>
+                    <!--<p:poll  interval="5" widgetVar="poll"   update="frmListaMaquinarias" />-->
+                </h:form>
+                
+
                             <script>
 
 
@@ -42,7 +48,7 @@
                                         type: 'pie'
                                     },
                                     title: {
-                                        text: "HOLAAA"
+                                        text: "#{tiempoMaquinariaMBR.mtiempomaqui.codigoMaquinaria}"
                                     },
                                     tooltip: {
                                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -74,11 +80,6 @@
                                 });
 
                             </script>
-
-                        </div>
-                    </div>
-                    <p:poll  interval="5" widgetVar="poll"   update="frmListaMaquinarias" />
-                </h:form>
             </ui:define>
             <ui:define name="left">
             </ui:define>

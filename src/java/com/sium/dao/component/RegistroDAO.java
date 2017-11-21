@@ -64,7 +64,7 @@ public class RegistroDAO implements IRegistroDAO {
                             eq("fecha", fecha)
                     )
             );
-            if (findIterable != null) {
+            if (findIterable.first() != null) {
                 for (Document dregistro : findIterable) {
                     RegistroTO registro = new RegistroTO();
                     registro.setCodigoMaquinaria(codigoMaquinaria);
@@ -95,7 +95,7 @@ public class RegistroDAO implements IRegistroDAO {
                             
                     )
             );
-            if (findIterable != null) {
+            if (findIterable.first() != null) {
                 for (Document dregistro : findIterable) {
                     RegistroTO registro = new RegistroTO();
                     registro.setCodigoMaquinaria(codigoMaquinaria);

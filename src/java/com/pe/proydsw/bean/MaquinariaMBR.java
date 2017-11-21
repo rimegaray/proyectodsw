@@ -70,11 +70,12 @@ public class MaquinariaMBR extends MensajeSYSUtils{
         this.hashmapestados = new HashMap<>();
         
         this.suscriber = new Subscriber();
+        suscriber.cargarMaquinarias();
         suscriber.start();
     }
     
     
-    public String registrarCate(){
+    public String registrarMaquinaria(){
         try {
             this.mmaquinaria = new MaquinariaTO();
             String respuesta;
@@ -90,7 +91,7 @@ public class MaquinariaMBR extends MensajeSYSUtils{
             this.mmaquinaria.setNombre(nombremaq);
             this.mmaquinaria.setCategoria(categoriamaq);
             respuesta = maquinariaDAO.insertMaquinaria(mmaquinaria);
-        
+            this.suscriber.subscribirse(mmaquinaria.getCategoria(), mmaquinaria.getCodigoMaquinaria());
         if (respuesta.equals("correcto")){
             messageInfo("Se realizo la creación de la Maquinaria");
         }else{

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <h:outputStylesheet library="css" name="cssentrada.css"/>
+    
+    <body>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />          
+        <title>INGRESO A LA APP WEB</title>
+    </h:head>
+    <h:body  style="background-color: #fee800">
+        <div align="center">
+        <h:form id="frmLogin">
+        <p:growl id="growl" showDetail="true" sticky="false"/>
+        <h:graphicImage library="images" name="logo-soldexa.png"/>
+        <p:panel style="margin-top: 12%;width: 360px;font-family: arial;font-size: 28px;">           
+            <h:outputText value="Ingrese su cuenta: " style="font-family: arial;font-size: 14px; margin-bottom: 1em; "/>
+            <!--<p:panelGrid styleClass="companyHeaderGrid">    -->
+                <p:row>
+                    <p:column style="text-align: right">
+                    <p:outputLabel value="Usuario :" for="username" style="font-family: arial;font-size: 14px;"/>
+                    </p:column>
+                    <p:column style="text-align: right">
+                    <p:inputText id="username"  style="text-transform: uppercase;font-family: arial;font-size: 14px">
+                        <f:validator validatorId="validatorVacio"/>
+                    </p:inputText>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="text-align: right">
+                    <p:outputLabel value="Password :" for="claveuser" style="font-family: arial;font-size: 14px;"/>
+                    </p:column>
+                    <p:column style="text-align: right">
+                    <p:keyboard id="claveuser"  password="true" keypadOnly="true" style="font-family: arial;font-size: 14px" >
+                        <f:validator validatorId="validatorVacio"/>
+                    </p:keyboard>
+                    </p:column>
+                </p:row>
+                
+             <h:outputText value="" />  
+             <h:outputText value="" />
+           <!--</p:panelGrid>-->
+            <div align="right" >
+             <p:commandButton action="#" value="Ingresar" style="font-family: arial;font-size: 12px;color: #000000" icon="ui-icon-key" ajax="frmLogin"/>
+             <p:commandButton type="reset" value="Limpiar" style="font-family: arial;font-size: 12px;color: #000000" icon="ui-icon-clipboard"/>             
+            </div>
+         </p:panel>          
+        </h:form>
+        </div>
+    </h:body>
+  </body>
+</html>

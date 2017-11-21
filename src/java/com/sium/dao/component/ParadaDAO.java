@@ -63,7 +63,7 @@ public class ParadaDAO implements IParadaDAO {
                             eq("fecha", fecha)
                     )
             );
-            if (findIterable != null) {
+            if (findIterable.first() != null) {
                 for (Document dparada : findIterable) {
                     ParadaTO parada = new ParadaTO();
                     parada.setCodigoMaquinaria(codigoMaquinaria);

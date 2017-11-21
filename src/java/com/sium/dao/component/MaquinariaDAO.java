@@ -66,7 +66,7 @@ public class MaquinariaDAO implements IMaquinariaDAO {
         try {
             collection = database.getCollection("maquinarias");
             FindIterable<Document> findIterable = collection.find(new Document());
-            if (findIterable != null) {
+            if (findIterable.first() != null) {
                 for (Document dMaquinaria : findIterable) {
                     MaquinariaTO maquinaria = new MaquinariaTO();
                     maquinaria.setCodigoMaquinaria(dMaquinaria.getInteger("codigoMaquinaria"));
@@ -75,7 +75,7 @@ public class MaquinariaDAO implements IMaquinariaDAO {
                     listaMaquinarias.add(maquinaria);
                 }
             } else {
-                System.out.println("No existe paradas");
+                System.out.println("No existe maquinarias");
             }
         } catch (MongoException e) {
             System.out.println(e.getMessage());

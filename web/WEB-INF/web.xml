@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>formularios/Frmindex.xhtml</welcome-file>
+        <welcome-file>formularios/index.xhtml</welcome-file>
     </welcome-file-list>
     
     <servlet-mapping>

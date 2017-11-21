@@ -82,7 +82,7 @@ public class TiempoMaquinariaDAO implements ITiempoMaquinariaDAO {
         try {
             collection = database.getCollection("tiempoMaquinaria");
             FindIterable<Document> findIterable = collection.find(eq("codigoMaquinaria", String.valueOf(codigoMaquinaria)));
-            if (findIterable != null) {
+            if (findIterable.first() != null) {
                 probando=0;
                 for (Document dMaquinaria : findIterable) {
                     String codigoMaq;

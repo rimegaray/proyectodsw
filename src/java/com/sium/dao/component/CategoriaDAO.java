@@ -65,7 +65,7 @@ public class CategoriaDAO implements ICategoriaDAO {
         try {
             collection = database.getCollection("categorias");
             FindIterable<Document> findIterable = collection.find(new Document());        
-            if (findIterable != null) {
+            if (findIterable.first() != null) {
                 for (Document dCategoria : findIterable) {
                     CategoriaTO categoria = new CategoriaTO();
                     //Al insertar en duro, mongo lo guarda como un double --> 1.0
