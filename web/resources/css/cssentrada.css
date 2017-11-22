@@ -16,8 +16,21 @@ text-align: center;
 background-image: url("../resources/images/fondorecetario.jpg");
 } 
 
+.prueba{
+    border: solid 1px #aaa !important;
+    background: #fff !important;
+    -webkit-box-shadow: none !important;
+}
 
 
+.ui-widget-content{
+ background: #fee800;  
+border-top: solid 9px cornflowerblue; 
+color: slategray;
+}
+.ui-panel .ui-panel-content{
+  /*  background: none !important;*/
+}
 
 .companyHeaderGrid.ui-panelgrid>*>tr,
 .companyHeaderGrid.ui-panelgrid>*>tr>td {

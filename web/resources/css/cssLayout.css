@@ -103,3 +103,9 @@ color: #000000;
 .alinder{
     text-align: right;    
 }
+
+
+input[type=text]{
+    background: solid 1px #999;
+    
+}
