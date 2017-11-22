@@ -1,8 +1,0 @@
-/* Stellar(parallaxBG) styles
-========================================================*/
-.stellar-block {
-  background-attachment: fixed;
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: cover !important;
-}
