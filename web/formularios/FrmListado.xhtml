@@ -39,13 +39,10 @@
 
                                 <p:column headerText="Detalle" style="text-align: center;font-family: arial;font-size: 9px;width: 15%" >
                                     <p:commandLink    actionListener="#{tiempoMaquinariaMBR.verDetalles(item.codigoMaquinaria)}" >
-                                        <p:button outcome="/formularios/FrmHistorialPorcentaje" value="Detalles"   icon="ui-icon-arrowrefresh-1-w" />
+                                        <p:button outcome="FrmHistorialPorcentaje" value="Detalles"   icon="ui-icon-arrowrefresh-1-w" />
                                         
                                     </p:commandLink>
-                                    <p:commandLink     >
-                                        <p:button outcome="/formularios/Frmmovil" value="real" icon="ui-icon-arrowrefresh-1-w" />
-                                        
-                                    </p:commandLink>
+                                    
                                     
                                     
                                 </p:column>

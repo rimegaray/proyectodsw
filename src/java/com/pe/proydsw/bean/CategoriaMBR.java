@@ -6,17 +6,10 @@
 package com.pe.proydsw.bean;
 
 import com.pe.proydsw.utils.MensajeSYSUtils;
-import com.sium.dao.component.CategoriaDAO;
-import com.sium.dao.component.MaquinariaDAO;
 import com.sium.dao.dao.DAOFactory;
 import com.sium.dao.design.ICategoriaDAO;
-import com.sium.dao.design.ITiempoMaquinariaDAO;
 import com.sium.dao.to.CategoriaTO;
-import com.sium.dao.to.MaquinariaTO;
-import com.sium.mqtt.SubscribeCallback;
-import com.sium.mqtt.Subscriber;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -97,9 +90,7 @@ public class CategoriaMBR extends MensajeSYSUtils implements Serializable {
         return "/formularios/Frmagregar";
     }
 
-    public String limpiarcajas() {
-        return "/FORMULARIOS/FrmManttoNivel";
-    }
+    
     
      
 

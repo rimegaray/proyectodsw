@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      lang="en">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+
+        <title>Inicio del Sistema</title>
+
+
+        <meta charset="utf-8" />
+        <meta name = "format-detection" content = "telephone=no" />
+
+
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="css/grid.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/stellar.css" />
+        <link rel="stylesheet" href="css/touchTouch.css" />
+
+
+        <script src="js/thumbnailBgTypeHorz.js"></script>
+        <script src="js/touchTouch.jquery.js"></script>
+
+        
+
+        <script>
+            $(document).ready(function () {
+                $('.pic_csroll .pic').touchTouch();
+            });
+        </script>
+
+
+    </h:head>
+
+    <h:body>
+        
+
+
+        <h:form id="frmLogin">
+
+            <p:growl id="growl" showDetail="true" sticky="false"/>
+            <!--========================================================
+                                      LOADER
+            =========================================================-->
+            <div class="page-loader page-loader-variant-1">
+                <div>
+
+                    <h1>
+                        <a href="index.xhtml">
+                            <img src="img/logoloading.png" class='img_indent_1 rotateIn animated infinite' alt=""/>
+                            <span class="tal">
+                                <em class='slogan_1'>#{msg['generator.slogan1']}</em>
+                                <span class='slogan_2'>#{msg['generator.slogan2']}</span>
+                                <span class='clearfix'></span>
+                            </span>
+
+
+                        </a>
+                    </h1>
+                    <div class="text-center offset-top-45">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--========================================================
+                                  HEADER
+            =========================================================-->
+
+            <header id="header" class="head_1">
+
+                <div class="container ">
+                    <div class="Card">
+                        <div class="CardTopic">Grafica pastel<i class="icon-chart-bar Fright Fs30"></i></div>
+                        <div class="Separator"></div>
+                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+                            <script src="https://code.highcharts.com/highcharts.js"></script>
+                            <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+                            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+                        <div id="container" style="height: 400px"></div>
+
+                        <h:outputText value="#{tiempoMaquinariaMBR.tiempouso}"/>
+                        <h:outputText value="#{tiempoMaquinariaMBR.tiemponouso}"/>
+
+                        <script>
+
+
+                            Highcharts.chart('container', {
+                                chart: {
+                                    plotBackgroundColor: null,
+                                    plotBorderWidth: null,
+                                    plotShadow: false,
+                                    type: 'pie'
+                                },
+                                title: {
+                                    text: "#{tiempoMaquinariaMBR.mtiempomaqui.codigoMaquinaria}"
+                                },
+                                tooltip: {
+                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                },
+                                plotOptions: {
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: {
+                                            enabled: true,
+                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                            style: {
+                                                color: (Highcharts.theme) || 'black'
+                                            }
+                                        }
+                                    }
+                                },
+                                series: [{
+                                        name: 'Brands',
+                                        colorByPoint: true,
+                                        data: [{
+                                                name: 'Tiempo de uso',
+                                                y: 60
+                                            }, {
+                                                name: 'Tiempo de no uso',
+                                                y: 40
+                                            }]
+                                    }]
+                            });
+
+                        </script>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="stuck_container NoIndent" style="background-color:#F0F2F5; padding:0px 3rem;">
+                    <div class="Separator"></div>
+
+
+
+                    <div class="TexAlRight"  >
+
+
+                        <div class=" TealGreen Fs20 FontVoltSemiBold">#{msg['generator.redessociales']}
+
+                            <a href="http://www.facebook.com/" target="_blank" class="Facebook Fs50"><i class="fa fa-facebook-square"></i></a>
+                            <a href="#layout-footer" class="Red2 Fs50"><i class="fa fa-youtube-square"></i></a>
+                            <a href="#layout-footer" class="Twitter Fs50"><i class="fa fa-twitter-square"></i></a>
+                            <a href="#layout-footer" class="Blue2 Fs50"><i class="fa fa-linkedin-square"></i></a>
+                            <a href="#layout-footer" class="GooglePlus Fs50"><i class="fa fa-google-plus-square"></i></a>
+
+
+                            <p:spacer style="width: 30px"/>
+
+                            Idioma / language:
+                            <p:spacer style="width: 10px"/>
+
+                            <p:selectOneMenu   value="#{funIdiomaMBR.localidad}" 
+                                               onchange="submit()"
+                                               valueChangeListener="#{funIdiomaMBR.localidadChanged}" 
+                                               style="font-family: arial;font-size: 15px">                                        
+                                <f:selectItems value="#{funIdiomaMBR.lstPaises}" />
+                            </p:selectOneMenu>
+                            <i class="fa fa-flag Fs50 TealGreen"></i>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="Separator"></div>
+                </div>
+
+
+                <div id="stuck_container">
+
+
+                    <div class="container">
+                        <h1>
+                            <a href="index.xhtml">
+                                <img src="images/logo.png" class='img_indent_1 ' alt=""/>
+                                <span class="tal">
+                                    <em class='slogan_1'>#{msg['generator.slogan1']}</em>
+                                    <span class='slogan_2'>#{msg['generator.slogan2']}</span>
+                                    <span class='clearfix'></span>
+                                </span>
+                            </a>
+                        </h1>
+
+                        <nav id="mainNav">
+                            <ul class="sf-menu">
+                                <li class="current"><a href="index.xhtml" >#{msg['generator.menuop1']}</a></li>
+                                <li><a href="#">#{msg['generator.menuop2']}</a>
+                                    <ul>
+                                        <li><a href="empresa.xhtml">¿Quienes somos?</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="tours.xhtml">Tours</a>
+                                    <ul>
+                                        <li><a href="#">De medio día</a></li>
+                                        <li><a href="#">día completo</a></li>
+                                        <li><a href="#">De noche</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">#{msg['generator.menuop4']}</a>
+                                    <ul>
+                                        <li><a href="#">Museos</a>
+                                            <ul>
+                                                <li><a href="museos-mnaantropologia.xhtml">Museo Nacional de Arqueología, Antropología e Historia del Perú</a></li>
+                                                <li><a href="museos-martelima.xhtml">Museo de Arte de Lima</a></li>
+                                                <li><a href="#">Museo de Arte Italiano</a></li>
+                                                <li><a href="#">Museo del Banco Central de Reserva del Perú (BCR)</a></li>
+                                                <li><a href="#">Museo Larco</a></li>
+                                                <li><a href="#">Museo de Oro</a></li>
+                                                <li><a href="#">Museo Presbítero Maestro</a></li>
+                                                <li><a href="#">Museo Pedro de Osma</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Lima Religiosa</a></li>
+                                        <li><a href="#">Huacas de Lima</a></li>
+                                        <li><a href="#">Circuito Mágico del Agua</a></li>
+                                        <li><a href="#">Pantanos de Villa</a></li>
+                                        <li><a href="#">Fortaleza Real Felipe</a></li>
+                                        <li><a href="#">Casa Aliaga</a></li>
+                                        <li><a href="#">Casa de Osambela</a></li>
+                                        <li><a href="#">Casa Torre Tagle</a></li>
+                                        <li><a href="#">Parque de la Muralla</a></li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <li class="last-menu-item"><a href="contacto.xhtml">#{msg['generator.menuop5']}</a></li>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </nav>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!--========================================================
+                                      CONTENT
+            =========================================================-->
+            <section id="content">
+                <div class="banner1 stellar-block s1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_12">
+                                <div class='block_1 s2'>
+                                    <a href="contacto.xhtml" class="btn-default fr mar_t_1"><em>Contáctanos</em></a>
+                                    <p class="p1">
+
+                                        VIAJA A BALI, ÚNETE A LOS MEJORES Y ÚNICOS TOURS<br /><span>Te llevaremos, te mostraremos, te haremos enamorar.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='wrapper_1'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_10 preffix_1 tac">
+                                <h2 class='s3'>Bienvenido a nuestro Sitio</h2>
+                                <h3 class='mar_t_2 s4'>La mejor compañia para conocer y conocerte</h3>
+                                <p class="p2 mar_t_3 s5">Algunos de nuestro sitios principales son:</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class='wrapper_2'>
+                    <div class="picHolder">
+                        <ul class='pic_csroll s6'>
+                            <li>
+                                <a href="resources/destinossb/ballestasparacas_big.jpg" class="pic"><span class="_over"></span><img class="" src="resources/destinossb/ballestasparacas_pic.jpg" alt=""/></a>
+                            </li>
+                            <li>
+                                <a href="resources/destinossb/circuitodeaguas1_big.jpg" class="pic"><span class="_over"></span><img class="" src="resources/destinossb/circuitodeaguas1_pic.jpg" alt=""/></a>
+                            </li>
+                            <li>
+                                <a href="resources/destinossb/catedraldelima_big.jpg" class="pic"><span class="_over"></span><img class="" src="resources/destinossb/catedraldelima_pic.jpg" alt=""/></a>
+                            </li>
+                            <li>
+                                <a href="resources/destinossb/comarqueologicocaral_big.jpg" class="pic"><span class="_over"></span><img class="" src="resources/destinossb/comarqueologicocaral_pic.jpg" alt=""/></a>
+                            </li>
+                            <li>
+                                <a href="resources/destinossb/castillodechancay_big.jpg" class="pic"><span class="_over"></span><img class="" src="resources/destinossb/castillodechancay_pic.jpg" alt=""/></a>
+                            </li>
+                            <li>
+                                <a href="images/p1_big6.jpg" class="pic"><span class="_over"></span><img class="" src="images/p1_pic6.jpg" alt=""/></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class='wrapper_3'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_8 preffix_2 tac">
+                                <div class='bord_1 s7'></div>
+                                <h3 class='mar_t_2 s8'>from the blog</h3>
+                                <p class="p2 mar_t_2 s9">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                                <div class='bord_2 s10'></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="grid_12 tac">
+                                <time datetime="2014-04-18" class='s11'>Posted on April 18, 2014 by Admin in General</time>
+                                <img class="mar_t_2 s12" src="images/p1_pic8.jpg" alt=""/>
+                                <p class="mar_t_3 s13">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent vestibulum molestie lacus. Aenean nonummy hendrerit mauris. Phasellus porta. Fusce suscipit varius mi. Lorem ipsum dolor sit amet, consecteter adipiscing elit. Praesent vestibulum molestie lacus. Morbi nunc odio, gravida at, cursus nec, luctus a, lorem. Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="grid_4 extra_wrap mar_t_4 s14">
+                                <img class="img_indent" src="images/p1_pic9.jpg" alt=""/>
+                                <div class='extra_wrap'>
+                                    <a href="#" class='a1'>Lorem ipsum dolor sit ame</a>
+                                    <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit ame</p>
+                                </div>
+                            </div>
+                            <div class="grid_4 extra_wrap mar_t_4 s15">
+                                <img class="img_indent" src="images/p1_pic10.jpg" alt=""/>
+                                <div class='extra_wrap'>
+                                    <a href="#" class='a1'>Sed in lacus ut enim adipisc</a>
+                                    <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit ame</p>
+                                </div>
+                            </div>
+                            <div class="grid_4 extra_wrap mar_t_4 s16">
+                                <img class="img_indent" src="images/p1_pic11.jpg" alt=""/>
+                                <div class='extra_wrap'>
+                                    <a href="#" class='a1'>Poler rem ipsum dolor</a>
+                                    <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit ame</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>   
+                </div>
+                <div class='wrapper_4'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_8 preffix_2 tac">
+                                <div class='bord_1 s17'></div>
+                                <h3 class='mar_t_3 s18'>Productos y servicios</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="grid_3 mar_t_4 s19">
+                                <img class="" src="images/p1_pic12.jpg" alt=""/>
+                                <p class="p2 mar_t_2">Alojamiento</p>
+                                <div class='bord_3'></div>
+                                <a href="#" class='a2'>Pellentesque sed dolor</a>
+                                <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque sed dolor. Aliquam congue fermentum nisl. Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euismod in, auctor ut, ligula.</p>
+                            </div>
+                            <div class="grid_3 mar_t_4 s20">
+                                <img class="" src="images/p1_pic13.jpg" alt=""/>
+                                <p class="p2 mar_t_2">Excursiones diarias</p>
+                                <div class='bord_3'></div>
+                                <a href="#" class='a2'>Praesent vestibulum</a>
+                                <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque sed dolor. Aliquam congue fermentum nisl. Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euismod in, auctor ut, ligula.</p>
+                            </div>
+                            <div class="grid_3 mar_t_4 s21">
+                                <img class="" src="images/p1_pic14.jpg" alt=""/>
+                                <p class="p2 mar_t_2">Reuniones, Incentivos Eventos y Conferencias</p>
+                                <div class='bord_3'></div>
+                                <a href="#" class='a2'>Fusce euismod consequa</a>
+                                <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque sed dolor. Aliquam congue fermentum nisl. Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euism.</p>
+                            </div>
+                            <div class="grid_3 mar_t_4 s22">
+                                <img class="" src="images/p1_pic15.jpg" alt=""/>
+                                <p class="p2 mar_t_2">Crucero y más</p>
+                                <div class='bord_3'></div>
+                                <a href="#" class='a2'>Vestibulum iaculis lacin</a>
+                                <p class="p3 mar_t_1">Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque sed dolor. Aliquam congue fermentum nisl. Mauris accumsan nulla vel diam. Sed in lacus ut enim adipiscing aliquet. Nulla venenatis. In pede mi, aliquet sit amet, euismod in, auctor ut, ligula.</p>
+                            </div>
+                        </div>
+                    </div>         
+                </div>
+                <div class='wrapper_5'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_8 preffix_2 tac">
+                                <div class='bord_4 s23'></div>
+                                <h3 class='mar_t_3 s24'>¿POR QUÉ USAR NUESTRO TOUR OPERATOR?</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="grid_12 tac mar_t_1">
+                                <p class="p3 s25"><span>Lucro </span>-  Muchos operadores turísticos apoyan abrumadoramente a las agencias de viajes a través de comisiones sólidas, incluido el aire. Obtenga las MEJORES ganancias de sus operadores turísticos.</p>
+                                <p class="p3 s26"><span>Oportunidad </span>- Proporcione a sus clientes precios increíbles, utilizando el poder de compra de volumen inmejorable de los operadores turísticos.</p>
+                                <p class="p3 s27"><span>Amplia selección</span>- Los operadores turísticos tienen lo que desean sus clientes: variedad, selección y ubicaciones increíblemente diversas. Lo quieren, lo tenemos.</p>
+                                <p class="p3 s28"><span>Educación </span> - Los operadores turísticos proporcionan herramientas educativas para destinos, capacitación de mercadeo y viajes FAM.</p>
+                                <p class="p3 s29"><span>Confiabilidad </span>- Sus clientes pueden relajarse mientras están de vacaciones sabiendo que hay especialistas informados y amigables disponibles las 24 horas del día, los 7 días de la semana, para proporcionarles conocimiento experto sobre su destino.</p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </section>
+
+
+            <!--========================================================
+                                      FOOTER
+            =========================================================-->
+            <footer id="footer">
+                <div class="wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="grid_12">
+                                <div class="privacy-block">
+                                    Yellow Wheel © <span id="copyright-year"></span>  All Rights Reserved<a href="#">Privacy policy</a>
+                                    More <a rel="nofollow" href="#" target="_blank">Travel Agency</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <script src="js/script.js"></script>
+
+
+        </h:form>
+
+
+
+
+    </h:body>
+
+</html>

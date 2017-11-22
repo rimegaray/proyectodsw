@@ -38,7 +38,7 @@
                     <p:outputLabel value="Usuario :" for="username" style="font-family: arial;font-size: 14px;"/>
                     </p:column>-->
                     <p:column style="text-align: right">
-                        <p:inputText id="username"  placeholder="Username" style="font-family: arial;font-size: 18px; margin-top: 20px; " class="prueba">
+                        <p:inputText id="username" value="#{mantUsuarioMBR.musuario.usuario}" placeholder="Username" style="font-family: arial;font-size: 18px; margin-top: 20px; " class="prueba">
                         <f:validator validatorId="validatorVacio"/>
                     </p:inputText>
                     </p:column>
@@ -48,7 +48,7 @@
                     <p:outputLabel value="Password :" for="claveuser" style="font-family: arial;font-size: 14px;"/>
                     </p:column>-->
                     <p:column style="text-align: right">
-                    <p:keyboard id="claveuser"  placeholder="Password" password="true" keypadOnly="true" style="font-family: arial;font-size: 18px; margin-top: 20px;"  >
+                        <p:keyboard id="claveuser"  value="#{mantUsuarioMBR.musuario.password}" placeholder="Password" password="true" keypadOnly="true" style="font-family: arial;font-size: 18px; margin-top: 20px;"  >
                         <f:validator validatorId="validatorVacio"/>
                     </p:keyboard>
                     </p:column>
@@ -57,7 +57,7 @@
              <h:outputText value="" />  
              <h:outputText value="" />
            <!--</p:panelGrid>-->
-              <p:commandButton action="#" value="Ingresar" style="font-family: arial;font-size: 12px;color: #000000; width: 73%; height: 32px; margin-top: 20px;" icon="ui-icon-key" ajax="frmLogin"/>
+              <p:commandButton action="#{mantUsuarioMBR.ingresoSistema()}" value="Ingresar" style="font-family: arial;font-size: 12px;color: #000000; width: 73%; height: 32px; margin-top: 20px;" icon="ui-icon-key" ajax="frmLogin"/>
               
               
          </p:panel>          

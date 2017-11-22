@@ -1,0 +1,26 @@
+/* UItoTop styles
+========================================================*/
+#toTop {
+  display: none;
+  text-decoration: none;
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  overflow: hidden;
+  border: none;
+  color: #494949;
+  font-size: 43px;
+  line-height: 38px;
+  z-index: 20;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+#toTop:hover {
+  outline: none;
+  color: #33baaf;
+}
+@media only screen and (max-width: 1199px) {
+  #toTop {
+    display: none !important;
+  }
+}

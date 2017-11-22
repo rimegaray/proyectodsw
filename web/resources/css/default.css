@@ -1,3 +1,5 @@
+
+
 body {
     background-color: #eeeeee;
     font-size: 12px;
@@ -18,3 +20,120 @@ h1 {
 .styleRed{
     background-color: red;
 }
+
+
+/* ssssssssss */
+.page-loader-variant-1 {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 25px;
+  color: #fff;
+  z-index: 9999999;
+  background: #313131;
+  transition: .3s all ease;
+}
+
+.page-loader-variant-1 .spinner {
+  width: 56px;
+  height: 56px;
+  background-position: -2240px 0;
+  animation: 1.5s sprite-animation steps(40) infinite;
+  display: inline-block;
+}
+
+.page-loader-variant-1.loaded {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+}
+
+
+
+.img_indent_1 {
+  float: left;
+  margin-right: 15px;
+  /* Landscape phone to portrait tablet */
+}
+
+@-webkit-keyframes rotateIn {
+  0% {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes rotateIn {
+  0% {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transform: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.rotateIn {
+  -webkit-animation-name: rotateIn;
+  animation-name: rotateIn;
+}
+
+
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.animated.flip {
+  -webkit-backface-visibility: visible;
+  -ms-backface-visibility: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+
+
+/* ffff */
+
+
+

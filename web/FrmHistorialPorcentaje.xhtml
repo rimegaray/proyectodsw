@@ -8,17 +8,42 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" href="css/style.css" />
     </h:head>
     <body>
         
-         
-        <ui:composition template="./../template/layout.xhtml">
+        
+
+
+        <ui:composition template="./template/layout.xhtml">
+            
             <ui:define name="content">
+                <div class="page-loader page-loader-variant-1">
+                        <div>
+
+                            <h1>
+                                <a href="index.xhtml">
+                                    <img src="img/logoloading.png" class='img_indent_1 rotateIn animated infinite' alt=""/>
+                                    <span class="tal">
+                                        <em class='slogan_1'>Grafica Pastel</em>
+                                        <span class='slogan_2'>item1</span>
+                                        <span class='clearfix'></span>
+                                    </span>
+
+
+                                </a>
+                            </h1>
+                            <div class="text-center offset-top-45">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                
                 <h:form id="frmListaMaquinarias">   
-                   
+                    
+
                     <div class="Container100 ui-fluid">
                         <div class="Card">
+                            <div class="CardTopic">Grafica pastel<i class="icon-chart-bar Fright Fs30"></i></div>
                             <div class="Separator"></div>
 
                             <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -79,7 +104,7 @@
 
                         </div>
                     </div>
-                    <p:poll  interval="5" widgetVar="poll"   update="frmListaMaquinarias" />
+                    <!--<p:poll  interval="5" widgetVar="poll"   update="frmListaMaquinarias" />-->
                 </h:form>
 
 
