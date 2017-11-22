@@ -24,8 +24,8 @@ public class MongoTest {
         try {
             MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://aisac:aisac@ds058508.mlab.com:58508/sium"));
             MongoDatabase database = mongoClient.getDatabase("sium");
-            MongoCollection<Document> collection = database.getCollection("user");
-            Document doc = new Document("nombre", "Raul");
+            MongoCollection<Document> collection = database.getCollection("usuario");
+            Document doc = new Document().append("usuario","raul").append("password", "123");
             collection.insertOne(doc);
         } catch (MongoException e) {
             System.out.println(e.getMessage());

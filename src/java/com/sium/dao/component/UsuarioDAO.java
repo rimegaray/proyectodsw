@@ -42,7 +42,7 @@ public class UsuarioDAO implements IUsuarioDAO {
                             eq("password", usuario.getPassword())
                     )
             );
-            return findIterable != null;
+            return findIterable.first() != null;
         } catch (MongoException e) {
             System.out.println(e.getMessage());
             return false;
